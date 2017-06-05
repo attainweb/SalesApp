@@ -1,0 +1,27 @@
+<template name="jobsMonitor">
+  <div id='jobs-monitor' class="fullscreen panel panel-default">
+    <div class="panel-heading">
+        <h1 class="text-center">{{i18n 'jobsMonitor.title'}}</h1>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <tr>
+            <th>{{ i18n 'jobsMonitor.job.type'}}</th>
+            <th>{{ i18n 'jobsMonitor.job.status' }}</th>
+            <th>{{ i18n 'jobsMonitor.job.created' }}</th>
+            <th>{{ i18n 'jobsMonitor.job.updated' }}</th>
+        </tr>
+          {{#each job in jobs}}
+          <tr class="job-item">
+            <td class="job-type">{{ job.type }}</td>
+            <td class="job-status label label-{{ statusClass job.status job.created }}">
+              {{ statusLabel job.status job.created }}
+            </td>
+            <td class="job-created">{{ formatDateTime job.created }}</td>
+            <td class="job-updated">{{ formatDateTime job.updated }}</td>
+          </tr>
+          {{/each}}
+      </table>
+    </div>
+  </div>
+</template>

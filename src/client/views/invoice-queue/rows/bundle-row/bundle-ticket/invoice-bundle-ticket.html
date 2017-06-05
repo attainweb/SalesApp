@@ -1,0 +1,20 @@
+<Template name="invoiceBundleTicket">
+  <table class="table data-table">
+    <thead>
+      <tr>
+        <td>{{ i18n 'paymentExports.bundledAt' }}</td>
+        <td>{{ i18n 'exportPaidInvoices.table.exportId' }}</td>
+        <td>{{ i18n 'paymentExports.yenAmount' }}</td>
+        <td>{{ i18n 'exportPaidInvoices.table.count' }}</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ formatDate ticket.bundledAt }}</td>
+        <td>{{ ticket._id}}</td>
+        <td>{{ formatCurrency 'YEN' ticket.yenAmount }}</td>
+        <td>{{ count ticket.invoiceTicketIds }}</td>
+      </tr>
+    </tbody>
+  </table>
+</Template>

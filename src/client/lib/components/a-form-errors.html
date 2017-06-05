@@ -1,0 +1,7 @@
+<template name="aFormErrors">
+  <div class="has-error">
+      {{#each errors}}
+        <span class="help-block">{{formI18n ../formId this}}</span>  
+      {{/each}}
+  </div>    
+</template>

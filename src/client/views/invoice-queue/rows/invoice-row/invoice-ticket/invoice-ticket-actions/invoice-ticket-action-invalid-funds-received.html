@@ -1,0 +1,14 @@
+<template name="invoice_ticket_action_invalid_funds_received">
+  <div class="row invoice_ticket_action_invalid_funds_received">
+    <div class="col-sm-12">
+        <button class="approve-invalid-ticket btn btn-success">
+          {{ i18n 'invoiceCard.buttons.approveInvalidFunds' }}
+        </button>
+        <button class="refund-invalid-ticket btn btn-primary" 
+                data-toggle="modal" data-target="#refund-invalid-funds-{{getTicketId}}">
+          {{ i18n 'invoiceCard.buttons.refundInvalidFunds' }}
+        </button>
+        {{> refundInvalidFunds ticketId=getTicketId}}
+    </div>
+  </div>
+</template>

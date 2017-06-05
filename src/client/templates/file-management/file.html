@@ -1,0 +1,11 @@
+<template name="file">
+  <div class="file">
+    <div class="preview">
+      {{#if isImage signedUrl}}
+        <img src="{{signedUrl}}" class="{{imageClasses}} {{smallDocClasses}}">
+      {{else}}
+        <i class="fa fa-file-o"></i>
+      {{/if}}
+    </div>
+  </div>
+</template>

@@ -1,0 +1,10 @@
+<template name="bankSelector">
+  <div class="form-group">
+    <select class={{props.class}} name="bank">
+      <option value="" disabled selected>{{ i18n 'invoiceCard.selector.selectBank' }}</option>
+      {{#each bank in getBanks }}
+        <option value={{@index}}>{{bank}}</option>
+      {{/each}}
+    </select>
+  </div>
+</template>

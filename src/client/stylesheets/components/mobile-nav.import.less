@@ -1,0 +1,44 @@
+.mobile-nav {
+
+  &.is-compliance, &.is-customer-service, &.is-invoice-manager-role {
+    border-radius: 0;
+    @media (min-width: @mobile-breakpoint) {
+      .navbar-nav {
+        float: right;
+      }
+    }
+  }
+
+  @media (min-width: @mobile-breakpoint) {
+    &:not(.is-compliance):not(.is-customer-service):not(.is-invoice-manager-role) {
+      display: none;
+    }
+  }
+
+  .navbar-brand {
+    color: white;
+    padding-left: 20px;
+  }
+
+  .navbar-nav {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .navbar-collapse {
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 1px;
+    transition: height 200ms;
+
+    &.in {
+      height: auto;
+      overflow-y: auto;
+    }
+  }
+
+  .navbar-toggle .icon-bar {
+    background: #fff;
+  }
+}

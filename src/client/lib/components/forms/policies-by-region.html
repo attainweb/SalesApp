@@ -1,0 +1,14 @@
+<template name="policiesByRegion">
+  <div class="policiesByRegion">
+    <ul class="list-inline">
+      <span></span>
+        {{#each policy in policiesByResidenceCountry}}
+          <li>
+            <a href="{{getUrl policy.file}}" id="conduct-code" class="label label-info" target="_blank">
+              {{ policyName }} {{ policyLang policy.lang }}
+            </a>
+          </li>
+        {{/each}}
+    </ul>
+  </div>
+</template>

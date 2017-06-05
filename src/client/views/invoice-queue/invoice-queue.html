@@ -1,0 +1,63 @@
+<template name="invoiceQueue">
+  <div id="invoice_queue" class="infinite-scroll full-width">
+    <div class="fullscreen panel panel-default">
+      <div class="panel-heading">
+        <h1 class="text-center">{{ title }}</h1>
+
+        <div class="row">
+          <div class="col-md-8 queue-filter-col">
+            {{> invoiceQueueTabs
+                selected=currentStateFilter
+                onTabChanged=onCurrentStateFilterChanged
+                counts=stateFilterCounts }}
+          </div>
+
+          <div class="col-md-4 queue-filter-col">
+            {{> dateRangeSelection
+                locale=getDateTimeLanguage
+                format="L"
+                onSelectionChanged=onRangeChanged
+                selectedRange=datesRange }}
+
+            {{> searchBar
+                categories=state.searchBarCategories
+                selectedCategory=searchCategory
+                value=searchValue
+                onSearchSubmitted=onSearchSubmitted }}
+           </div>
+        </div>
+      </div>
+    </div>
+    <div class="invoice-items">
+        <div class="row">
+
+          {{# if isInvoiceTicket }}
+
+            {{# if isActiveCurrentBundleFilter }}
+              {{> createBundleAction
+                  actionCallback=eventCallback }}
+            {{/ if }}
+
+            {{# each queueItem in queueItems }}
+              {{> invoiceQueueRow
+                  rowItem=queueItem
+                  actualState=currentStateFilter
+                  actionCallback=eventCallback }}
+            {{/ each }}
+
+          {{else}}
+            {{# each queueItem in queueItems }}
+              {{> invoiceBundleQueueRow
+                  rowItem=queueItem
+                  actualState=currentStateFilter
+                  actionCallback=eventCallback }}
+            {{/ each }}
+          {{/ if}}
+
+        </div>
+        {{> loadingIndicator
+            scrollTargetSelector=state.scrollTarget
+            showIndicator=hasMoreToLoad}}
+      </div>
+  </div>
+</template>

@@ -1,0 +1,41 @@
+.blue-nav-theme {
+  background-color: @navbar-bg-color;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    text-indent: 20px;
+    line-height: 40px;
+
+    &.active {
+      text-decoration: none;
+      background: rgba(255,255,255,0.2);
+
+      a, a:focus {
+        color: @navbar-link-active-color;
+        text-decoration: none;
+        background: @navbar-link-active-bg-color;
+      }
+    }
+
+    a {
+      font-weight: 300;
+      text-transform: uppercase;
+      display: block;
+      text-decoration: none;
+      color: @navbar-link-color;
+    }
+
+    a:hover {
+      text-decoration: none;
+      color: @navbar-link-hover-color;
+      background: rgba(255,255,255,0.2);
+    }
+
+    a:active, a:focus {
+      text-decoration: none;
+    }
+  }
+}

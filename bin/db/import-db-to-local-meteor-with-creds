@@ -1,0 +1,8 @@
+#!/bin/bash
+
+args=("$@")
+
+rm -R ./dump/${args[0]}
+mongodump --host aws-us-east-1-portal.8.dblayer.com:15125 --ssl --sslAllowInvalidCertificates --authenticationMechanism "SCRAM-SHA-1" --authenticationDatabase ${args[0]}  --db ${args[0]} --username ${args[1]} --password ${args[2]}
+mongo meteor --host 127.0.0.1 --port 3001 --eval "db.dropDatabase();"
+mongorestore --host 127.0.0.1 --port 3001 -d meteor dump/${args[0]}

@@ -1,0 +1,13 @@
+<template name="payBank">
+  
+  <div class="row">
+    <div class="col-md-6">{{ i18n 'payBank.payToAccount' }}</div>
+    <div class="col-md-6"><p><strong>{{{i18n 'payBank.accountInfo' }}}</strong></p></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">{{ i18n 'pay.usdRequested' }}</div>
+    <div class="col-md-6"><p class="usdRequested"><strong>{{formatCurrency 'USD' usdRequested}}</strong></p></div>
+  </div>
+
+</template>

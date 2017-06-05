@@ -1,0 +1,149 @@
+<template name="invoiceQueueTabs">
+  <div class="row">
+
+    {{# if (hasRole currentUser salePendingValidRoles) }}
+      <div class="col-md-4">
+
+      {{> counterButton label=(i18n 'invoiceManager.tabFilter.salePending')
+                         value="salePending"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='salePending' }}
+      </div>
+    {{/ if }}
+
+    {{# if (hasRole currentUser unpaidInvoicesValidRoles) }}
+      <div class="col-md-4">
+      {{> counterButton label=(i18n 'invoiceManager.tabFilter.unpaidInvoices')
+                         value="unpaidBankInvoices"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='unpaidInvoices' }}
+      </div>
+    {{/ if }}
+
+    {{# if (hasRole currentUser confirmBankAmountValidRoles) }}
+      <div class="col-md-4">
+      {{> counterButton label=(i18n 'invoiceManager.tabFilter.confirmBankAmount')
+                         value="confirmBankAmount"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='confirmBankAmount' }}
+      </div>
+    {{/ if }}
+
+    {{# if (hasRole currentUser sentToBankCheckerValidRoles) }}
+      <div class="col-md-4">
+      {{> counterButton label=(i18n 'invoiceManager.tabFilter.sentToBankChecker')
+                         value="sentToBankChecker"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='sentToBankChecker' }}
+      </div>
+    {{/ if }}
+
+    {{# if (hasRole currentUser prepareBundleValidRoles) }}
+      <div class="col-md-4">
+      {{> counterButton label=(i18n 'invoiceManager.tabFilter.prepareBundle')
+                         value="preBundle"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='prepareBundle' }}
+      </div>
+    {{/ if }}
+
+    {{# if (hasRole currentUser currentBundleValidRoles) }}
+      <div class="col-md-4">
+      {{> counterButton label=(i18n 'invoiceManager.tabFilter.currentBundle')
+                         value="currentBundle"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='currentBundle' }}
+      </div>
+    {{/ if }}
+
+    {{# if (hasRole currentUser bundleValidRoles) }}
+      <div class="col-md-4">
+      {{> counterButton label=(i18n 'invoiceManager.tabFilter.bundle')
+                         value="bundling"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='bundle' }}
+      </div>
+    {{/ if }}
+
+    {{# if (hasRole currentUser exportValidRoles) }}
+      <div class="col-md-4">
+      {{> counterButton label=(i18n 'invoiceManager.tabFilter.export')
+                         value="export"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='export' }}
+      </div>
+    {{/ if }}
+
+    {{# if (hasRole currentUser expiredValidRoles) }}
+      <div class="col-md-4">
+      {{> counterButton label=(i18n 'invoiceManager.tabFilter.expired')
+                         value="expiredInvoices"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='expired' }}
+      </div>
+    {{/ if }}
+    
+    {{# if (hasRole currentUser invalidFundsReceivedValidRoles) }}
+      <div class="col-md-4">
+      {{> counterButton label=(i18n 'invoiceManager.tabFilter.invalidFundsReceived')
+                         value="invalidFundsReceived"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='invalidFundsReceived' }}
+      </div>
+    {{/ if }}
+
+    {{# if (hasRole currentUser btcOrdersValidRoles) }}
+      <div class="col-md-4">
+      {{> counterButton label=(i18n 'invoiceManager.tabFilter.btcOrders')
+                         value="btcOrders"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='btcOrders' }}
+      </div>
+    {{/ if }}
+
+    {{# if (hasRole currentUser receiptSentValidRoles) }}
+      <div class="col-md-4">
+      {{> counterButton label=(i18n 'invoiceManager.tabFilter.receiptSent')
+                         value="receiptSent"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='receiptSent' }}
+      </div>
+    {{/ if }}
+
+    {{# if (hasRole currentUser forceReserveValidRoles) }}
+      <div class="col-md-4">
+      {{> counterButton label=(i18n 'invoiceManager.tabFilter.forceReserve')
+                  value="forceReserve"
+                  count=getCountValue
+                  isActive=isSelected
+                  onClicked=onTabSelected
+                  buttonId='forceReserve' }}
+      </div>
+    {{/ if }}
+
+  </div>
+</template>

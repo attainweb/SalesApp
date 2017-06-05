@@ -1,0 +1,38 @@
+{{lastName}} {{firstName}}님
+
+이 메일이 영수증이 됩니다.
+확인하신 후, 잘 보관해 주십시오.
+
+
+*******************
+
+{{productName}} 공개 후, 실제로 {{productName}}를 월렛에 입금하기 위해서는 영수증이 필요합니다.
+분실 하셨을 경우, {{productName}}를 사용할 수 없게 되므로 주의 부탁드립니다.
+
+*******************
+
+
+===================
+
+영수증
+
+-------------------
+
+영수증 ID(청구서 ID와 동일): {{invoiceNumber}}
+
+교환 완료 날짜: {{date}}
+
+비트코인 송금액: {{btcReceived}}
+
+적용 된 USD/BTC 환율: {{btcUsd}}
+
+{{productName}} 교환액: {{productPurchased}}
+
+달러 교환 희망 금액: {{usdRequested}}
+
+{{productName}} 환원용 코드: {{productPasscode}}
+
+===================
+
+
+{{> footer_LANG_ . }}

@@ -1,0 +1,17 @@
+<template name="reviewUserDoc">
+    <div class="pull-left review-user-doc">
+        <div class="image-container">
+            <div id="{{_id}}" class="doc-img-overlay {{overlayActiveClass}} {{disabledClass}}">
+                <div class="text">
+                    {{#if isPending}}
+                        {{{ i18n 'queueDoc.review.go' }}}
+                    {{/if}}
+                    {{#if isApproved}}
+                        {{{ i18n 'queueDoc.review.undo' }}}
+                    {{/if}}
+                </div>
+            </div>
+            {{> document smallDocAttrs}}
+        </div>
+    </div>
+</template>

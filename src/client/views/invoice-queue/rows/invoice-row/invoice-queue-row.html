@@ -1,0 +1,39 @@
+<template name="invoiceQueueRow">
+  <div class="data-panel">
+    {{# ticket_card 
+        cardTypeTemplate='invoice_ticket'
+        ticket=ticketItem
+        cardId=ticketItem.ticket.invoiceNumber
+        hasContent=hasContent }}
+    
+      {{# if isUnpaid }}
+        {{> invoice_ticket_action_unpaid ticketItem=rowItem options=getActionCallback }}
+      {{/ if }}
+      
+      {{# if isConfirmInvoicesPaid }}
+        {{> invoice_ticket_action_paid ticketItem=rowItem options=getActionCallback }}
+      {{/ if }}
+      
+      {{# if isPreBundle }}
+        {{> invoice_ticket_action_add_to_export ticketItem=rowItem options=getActionCallback }}
+      {{/ if }}
+      
+      {{# if isCurrentBundle }}
+        {{> invoice_ticket_action_remove_from_export ticketItem=rowItem options=getActionCallback }}
+      {{/ if}}
+
+      {{# if isBtcOrders }}
+        {{> invoice_ticket_action_update_comment ticketItem=rowItem }}
+      {{/ if }}
+
+      {{# if isNoProductReserved }}
+        {{> invoice_ticket_action_force_reserve ticketItem=rowItem options=getActionCallback }}
+      {{/ if }}
+
+      {{# if isInvalidFundsReceived }}
+        {{> invoice_ticket_action_invalid_funds_received ticketItem=rowItem options=getActionCallback }}
+      {{/ if}}
+
+    {{/ ticket_card }}
+  </div>
+</template>

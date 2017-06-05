@@ -1,0 +1,7 @@
+#!/bin/bash
+
+db=<REMOTE_DB_NAME>
+username=<USERNAME>
+password=<PASSWORD>
+
+./bin/db/import-db-to-local-meteor-with-creds "$db" "$username" "$password"

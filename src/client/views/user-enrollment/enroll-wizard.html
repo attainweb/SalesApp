@@ -1,0 +1,214 @@
+
+<template name="enrollWizard">
+  <div class="enroll panel panel-default fullscreen">
+    <div class="panel-body">
+      {{#if refIsValid}}
+        {{#if wizardloading}}
+          {{> spinner}}
+        {{else}}
+          {{> wizard id="enrollWizard" route="enrollWizard" steps=steps
+              stepsTemplate="StepsTemplate" buttonClasses="ui button"
+              nextButton=nextButton backButton=backButton confirmButton=confirmButton}}
+        {{/if}}
+      {{else}}
+        <h2 class="invalid-ref-code">{{ i18n 'enroll.errors.invalid-ref-code' }}</h2>
+      {{/if}}
+    </div>
+  </div>
+</template>
+
+<template name="StepsTemplate">
+  <h1 class="text-center">{{ step.title }}</h1>
+
+  <div class="row bs-wizard" style="border-bottom:0;">
+  {{#each wizard.steps}}
+    <div class="col-xs-3 bs-wizard-step {{stepClass id}}">
+      <div class="text-center bs-wizard-stepnum">{{enrollStepLabel index}}</div>
+      <div class="progress"><div class="progress-bar"></div></div>
+      <span class="bs-wizard-dot"></span>
+    </div>
+  {{/each}}
+  </div>
+</template>
+
+
+<template name="enrollWizardResidenceSelection">
+  {{#autoForm id="residence-selection-form" autocomplete="off" doc=step.data schema=step.schema}}
+    <div class="row">
+      <div class="col-sm-12">
+        {{> afQuickField name="language" firstOption=false value=selectedLang}}
+        {{> afQuickField name="residenceCountry" firstOption=false value=selectedCountry}}
+        {{> afQuickField name="agreedToDocumentsInEnglish" value=false}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 text-center">
+        {{> wizardButtons}}
+      </div>
+    </div>
+  {{/autoForm}}
+ </template>
+
+
+<template name="enrollWizardContactInformation">
+  {{#autoForm id="contact-information-form" autocomplete="off" doc=step.data schema=step.schema}}
+    <div class="row">
+      <div class="col-sm-6">
+        {{> afQuickField name="reftype" value=curRef.reftype }}
+        {{> afQuickField name="accountType" firstOption=false}}
+        {{> afQuickField name="surname"}}
+        {{> afQuickField name="firstname"}}
+        <div class="company-group">
+          <!--This companyName stands for the company the user is enrolling from, in case it's a company account -->
+          {{> afQuickField name="companyName"}}
+          {{> afQuickField name="registrationDate"}}
+        </div>
+
+        <div class="form-group{{#if afFieldIsInvalid name='email'}} has-error{{/if}} email-form">
+          <label for="email" class="control-label">{{ i18n 'enroll.email' }}</label>
+          <div class="{{#if resetEmailButtonShow}}input-group{{/if}}">
+            {{> afFieldInput name="email"}}
+            {{#if resetEmailButtonShow}}
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="button" id="reset-email">
+                  {{ i18n 'enroll.resetEmail' }}
+                </button>
+              </span>
+            {{/if}}
+          </div>
+          {{#if afFieldIsInvalid name='email'}}
+            <span class="help-block">{{afFieldMessage name='email'}}</span>
+          {{/if}}
+        </div>
+
+        <div class="form-group{{#if afFieldIsInvalid name='emailVerificationCode'}} has-error{{/if}}">
+          <label for="emailVerificationCode" class="control-label">{{ i18n 'enroll.emailVerificationCode' }}</label>
+          <div class="input-group">
+            {{> afFieldInput name="emailVerificationCode"}}
+            <span class="input-group-btn">
+              <button class="btn btn-{{#if verifyButtonState}}primary{{else}}default{{/if}}"
+               id="sendEmailVerificationCode" type="button">
+                {{ i18n 'enroll.sendEmailVerificationCode' }}
+              </button>
+              <button class="btn btn-{{#if confirmButtonState}}primary{{else}}default{{/if}}"
+               id="confirmEmailVerificationCode" type="button">
+                {{ i18n 'enroll.confirmEmailVerificationCode' }}
+              </button>
+            </span>
+          </div>
+          {{#if afFieldIsInvalid name='emailVerificationCode'}}
+            <span class="help-block">{{afFieldMessage name='emailVerificationCode'}}</span>
+          {{/if}}
+        </div>
+
+        {{> afQuickField name="phone"}}
+        {{> afQuickField name="birthdate" dataDateFormat="YYYY-MM-DD" placeholder="yyyy-mm-dd"}}
+      </div>
+      <div class="col-sm-6">
+        {{> afQuickField name="zip"}}
+        {{> afQuickField name="apiInvalidZip"}}
+        {{> afQuickField name="state"}}
+        {{> afQuickField name="city"}}
+        {{> afQuickField name="address"}}
+      </div>
+      <div class="col-sm-6 {{hiddenIfDistributor}}">
+
+        {{#if showPaymentOptions}}
+          {{> afQuickField name="paymentMethod" firstOption=false}}
+        {{else}}
+          {{> afQuickField name="paymentMethod" type="hidden" value="Btc"}}
+        {{/if}}
+        {{> afQuickField name="productAmount"}}
+      </div>
+      <div class="col-sm-12">
+        {{> policiesByRegion
+              userRole=role
+              policyName="PRIVACY"
+              residenceCountry=selectedResidenceCountry }}
+        {{> afQuickField name="acceptPolicy"}}
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 text-center">
+        {{> wizardButtons}}
+      </div>
+    </div>
+  {{/autoForm}}
+ </template>
+
+
+<template name="enrollWizardAgreements">
+  {{#autoForm id="agreements-form" autocomplete="off" doc=step.data schema=step.schema}}
+    <div class="row">
+      <div class="col-sm-12">
+        {{> afQuickField name="reftype" value=curRef.reftype }}
+      </div>
+      <div class="col-sm-12">
+        {{> policiesByRegion
+              userRole=role
+              policyName="TOC"
+              distlevel=distlevel
+              residenceCountry=selectedResidenceCountry }}
+        {{> afQuickField name="acceptToc"}}
+      </div>
+
+      <div class="col-sm-12 {{hiddenIfDistributor}}">
+        {{> policiesByRegion
+              userRole=role
+              policyName="RISK"
+              distlevel=distlevel
+              residenceCountry=selectedResidenceCountry }}
+        {{> afQuickField name="acceptRisk"}}
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 text-center">
+        {{> wizardButtons }}
+      </div>
+    </div>
+  {{/autoForm}}
+</template>
+
+
+<template name="enrollWizardDocuments">
+  {{#autoForm id="documents-form" autocomplete="off" doc=step.data schema=step.schema}}
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <p>{{{i18n 'documentUpload.subtitle'}}}</p>
+      </div>
+    </div>
+    {{ #if showUploadWarning }}
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <span class="label label-warning">{{ uploadWarningMessageKey }}</span>
+      </div>
+    </div>
+    {{/if}}
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+         <h2>{{ i18n 'enroll.governmentId' }}</h2>
+        {{> uploader }}
+        {{> files }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        {{> afQuickField name="uploadWarning"}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 text-center">
+        {{> wizardButtons}}
+      </div>
+    </div>
+  {{/autoForm}}
+</template>
+
+<template name="customFileUploadProgress">
+  <span>YES</span>
+  {{> FS.UploadProgressBar bootstrap=true}}
+</template>

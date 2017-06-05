@@ -1,0 +1,5 @@
+#!/bin/bash
+
+DATABASE=<TEST_DATABASE_URL>
+
+./bin/deploy/deploy -c -d -t -h <HOST_NAME> -db $DATABASE

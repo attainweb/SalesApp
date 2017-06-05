@@ -1,0 +1,7 @@
+<Template name="currency_amount_input">
+    {{# if props.label }} <label for="btcUsd"> {{ props.label }} </label> {{/ if}}
+    <div class="input-group">
+        {{# if showAddon }} <div class="input-group-addon"> {{props.textIcon}} <i class="fa {{ props.currencyIcon }}"></i></div> {{/ if}}
+        <input type="number" min="{{ props.min }}" step="{{ props.step }}" class="form-control" required>
+    </div>
+</Template>

@@ -1,0 +1,8 @@
+.dotted-borders(@border-widths) {
+  // Beautiful dotted borders as seen on the internet:
+  // https://medium.com/@luclemo/creating-true-dotted-borders-with-css-233f296d8145#.cgybg27qy
+  border-width: @border-widths;
+  border-image-source: url('/images/dotted-borders.svg');
+  border-image-slice: 33%; /* no unit for px, you can use % */
+  border-image-repeat: round; /* the middle slices will be repeated cleanly up to the edges */
+}

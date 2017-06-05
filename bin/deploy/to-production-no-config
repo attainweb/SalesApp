@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./bin/deploy/deploy -d -p -h <COMPANY_URL>

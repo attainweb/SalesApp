@@ -1,0 +1,60 @@
+<template name="queueTabs">
+  <div class="row">
+
+    <div class="col-md-4">
+      {{> counterButton label=(i18n 'approval.tabFilter.recent')
+                         value="recent"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='recent'}}
+    </div>
+
+    <div class="col-md-4">
+      {{> counterButton label=(i18n 'approval.tabFilter.unreviewed')
+                         value="unreviewed"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='unreviewed'}}
+    </div>
+
+    <div class="col-md-4">
+      {{> counterButton label=(i18n 'approval.tabFilter.watching')
+                         value="watching"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='watching' }}
+    </div>
+  </div>
+  <div class="row">
+    
+    <div class="col-md-4">
+      {{> counterButton label=(i18n 'approval.tabFilter.fundsReceived')
+                         value="fundsReceived"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='fundsReceived' }}
+    </div>
+
+    <div class="col-md-4">
+      {{> counterButton label=(i18n 'approval.tabFilter.cco')
+                         value="cco"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='cco' }}
+    </div>
+
+    <div class="col-md-4">
+      {{> counterButton label=(i18n 'approval.tabFilter.all')
+                         value="all"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='all' }}
+    </div>
+  </div>
+</template>

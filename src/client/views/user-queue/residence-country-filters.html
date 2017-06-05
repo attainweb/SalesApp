@@ -1,0 +1,14 @@
+<template name="residenceCountryFilters">
+  <div class="residence-country-filters">
+   <div class="row col-md-12">
+     {{#each countryCode in countryFilters }}   
+     <div class="col-md-4">
+       {{> checkbox label=(translateCountry countryCode) value=countryCode isChecked=isSelected onToggled=onItemToggled }}
+     </div>
+     {{/each }}
+     <div class="col-md-4">
+       {{> checkbox label=others value="others" isChecked=isSelected onToggled=onItemToggled }}
+     </div>
+  </div>
+</div>
+</template>

@@ -1,0 +1,30 @@
+<Template name="invoice_ticket">
+  <table class="table data-table">
+    <thead>
+      <tr>
+        <td>{{ i18n 'invoiceCard.name' }}</td>
+        <td>{{ i18n 'invoiceCard.invoiceNumber' }}</td>
+        <td>{{ i18n 'invoiceCard.paymentOption' }}</td>
+        <td>{{ i18n 'invoiceCard.state' }}</td>
+        <td>{{ i18n 'invoiceCard.dates.createdAt' }}</td>
+        <td>{{ i18n 'invoiceCard.amount' }}</td>
+        <td>{{ i18n 'invoiceCard.yenReceived' }}</td>
+        <td>{{ i18n 'invoiceCard.satoshisExpected' }}</td>
+        <td>{{ i18n 'invoiceCard.satoshisReceived' }}</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name">{{ ticket.buyerFullName }}</td>
+        <td class="invoice-number">{{ ticket.invoiceNumber }}</td>
+        <td class="payment-option">{{ ticket.paymentOption }}</td>
+        <td class="compliance-status"><div class="compliance-status-icon {{ complianceStatus }}"></div></td>
+        <td class="created-at">{{ formatDate ticket.createdAt }}</td>
+        <td class="usd-requested">{{ formatCurrency 'USD' ticket.usdRequested }}</td>
+        <td class="yen-received">{{ formatCurrency 'YEN' ticket.yenReceived }}</td>
+        <td class="satoshis-expected">{{ formatCurrency 'BTC' (satoshisToBtc ticket.satoshisExpected) }}</td>
+        <td class="satoshis-received">{{ formatCurrency 'BTC' (satoshisToBtc ticket.satoshisReceived) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</Template>

@@ -1,0 +1,43 @@
+<template name="account">
+    <div id="dashboard" class="container-fluid">
+        {{#with currentUser}}
+            {{#if shouldNotifyBuyer}}
+            <div class="row">
+                {{> notificationPanel message="messages.buyer"}}
+            </div>
+            {{/if}}
+
+            {{#if shouldNotifyUser}}
+            <div class="row">
+                {{#if isRejected}}
+                    {{> notificationPanel message="messages.rejectionNotice"}}
+                {{else}}
+                    {{> notificationPanel message="messages.thankYouSubmit"}}
+                {{/if}}
+            </div>
+            {{/if}}
+
+            {{#if needsWalletAddress}}
+            <div class="row">
+                {{> requiredActionsList}}
+            </div>
+            {{/if}}
+
+            {{#if canRequest}}
+            <div class="row">
+                {{> purchase_request}}
+            </div>
+            {{/if}}
+
+            {{#if needsWalletAddress}}
+            <div class="row">
+                {{> walletPanel}}
+            </div>
+            {{/if}}
+
+            <div class="row">
+                {{> accountInfoPanel}}
+            </div>
+        {{/with}}
+    </div>
+</template>

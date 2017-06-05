@@ -1,0 +1,20 @@
+<template name="investigatorTabs">
+  <div class="row">    
+    <div class="col-md-3">
+      {{> counterButton label=(i18n 'investigator.tabs.underInvestigation')
+                         value="underInvestigation"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='underInvestigation' }}
+    </div>
+    <div class="col-md-3">
+      {{> counterButton label=(i18n 'investigator.tabs.all')
+                         value="all"
+                         count=getCountValue
+                         isActive=isSelected
+                         onClicked=onTabSelected
+                         buttonId='all' }}
+    </div>
+  </div>
+</template>

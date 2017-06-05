@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+echo "Sourcing ./bin/env/development.sh as environment …"
+source ./bin/env/development.sh
+cd src/
+echo "Running meteor with --settings ../config/develop.json …"
+meteor "$@" --settings ../config/develop.json --no-release-check
+
+

@@ -1,0 +1,30 @@
+<template name="searchBar">
+  <div class="search_bar">
+    <div class="input-group">
+      <div class="input-group-btn">
+
+        <button type="button" class="btn btn-default dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+
+          <span class="fa fa-search" aria-hidden="true"></span>
+
+          {{props.selectedCategory.label}}
+          <span class="caret"></span>
+
+        </button>
+
+        <ul class="dropdown-menu">
+        {{#each category in props.categories}}
+          <li>
+             <a data-category={{@index}} data-filter-label={{category.label}} class="select-search-category">
+               {{category.label}}
+             </a>
+          </li>
+        {{/each}}
+        </ul>
+      </div> <!-- /btn-group -->
+      <input type="text" class="input-search-value form-control" placeholder="{{i18n 'searchBar.searchPlaceholder'}}" value="{{props.value}}">
+    </div> <!-- /input-group -->
+  </div>
+</template>

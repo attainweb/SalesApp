@@ -1,0 +1,96 @@
+<template name="login">
+
+<div id="login" class="panel">
+  <div class="panel-body">
+
+    <!-- ======== HEADING ======== -->
+
+    <p class="greeting">{{i18n 'login.greeting'}}</p>
+    <h1 class="title">{{i18n titleText}}</h1>
+
+    <div class="container-fluid">
+      {{ > languageSelector class="form-control" }}
+      <div class="row">
+
+        <!-- ======== LOGIN / PASSWORD RESET FORM ======== -->
+
+        <form id="login-form" class="{{passwordResetClass}}" action="action">
+
+          <div class="row">
+            <div class="form-group">
+              <input type="email" id="email" class="form-control" autofocus
+                     placeholder="{{i18n 'login.email'}}"/>
+            </div>
+          </div>
+
+          <!-- PASSWORD RESET MODE -->
+          {{#if state.forgotPassword}}
+            <div class="row">
+              <div class="form-group">
+                {{#button id="password-reset-btn" type="submit"
+                          class="btn btn-block btn-primary" waitOn=state.btnWaiting done=state.sent}}
+                  {{#if state.sent}}
+                    {{i18n 'login.resetButtonSent'}}
+                  {{else}}
+                    {{i18n 'login.resetButton'}}
+                  {{/if}}
+                {{/button}}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group text-center">
+                <a href="#" id="login-link">{{i18n 'login.loginLink'}}</a>
+              </div>
+            </div>
+
+          <!-- LOGIN MODE -->
+          {{else}}
+            <div class="row">
+              <div class="form-group">
+                <input type="password" id="password" class="form-control"
+                       placeholder="{{i18n 'login.password'}}" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                {{#button type="submit" id="login-button"
+                          class="btn btn-block btn-primary"
+                          waitOn=state.btnWaiting done=false}}
+                  {{i18n 'login.button'}}
+                {{/button}}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                {{#button type="button" id="reorder-button"
+                          class="btn btn-block btn-primary"
+                          done=false}}
+                  {{i18n 'login.reorderButton'}}
+                {{/button}}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group text-center">
+                <a href="#" id="forgot-password">{{i18n 'login.resetLink'}}</a>
+              </div>
+            </div>
+
+            {{/if}}
+
+        </form>
+      </div>
+    </div>
+    <footer>
+      <p>
+        {{i18n 'footer.email'}}
+        <a class="support_link" href="{{mailTo}}" target="_top">
+          {{ i18n 'login.supportEmail' }}
+        </a>
+      </p>
+    </footer>
+  </div>
+</div>
+</template>

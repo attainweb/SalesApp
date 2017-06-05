@@ -1,0 +1,16 @@
+<template name="userSummaryItem">
+  {{#if showNumber}}<td class="number">{{ userNumber }}</td>{{/if}}
+  <td><div class="user-summary-div"><span class="label label-{{progress}}"></span></div></td>
+  <td class="surname">{{user.personalInformation.surname}}</td>
+  <td class="name">{{user.personalInformation.name}}</td>
+  <td class="email">{{getPrimaryEmail}}</td>
+  <td class="residenceCountry"> {{ getTranslatedCountry }} </td>
+  <td class="account-type">{{ getTranslatedAccountType }}, {{localizedRoleName}}</td>
+  {{#if showLevel}}
+    <td class="level">{{#if user.isBuyer}} {{complianceLevel}} / {{applyingForComplianceLevel}} {{/if}}</td>
+  {{/if}}
+  <td>{{#if showIndicators}}<span class="label label-variant label-{{hasWalletAddress}}">{{i18n 'userSummary.commissionWallet'}}</span>{{/if}}</td>
+  {{#if showReviewer}}
+    <td class="reviewer-name">{{user.currentComplianceOfficerReviewerName}}</td>
+  {{/if}}
+</template>

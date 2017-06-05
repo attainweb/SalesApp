@@ -1,0 +1,24 @@
+<Template name="reviewRecords">
+  {{#if hasReviewRecords }}
+    <h3>{{ i18n 'complianceRecords.title' }}</h3>
+
+    <table class="table table-bordered table-striped table-condensed">
+      <tbody>
+        <tr>
+          <th> {{ i18n 'complianceRecords.complianceFullName' }} </th>
+          <th> {{ i18n 'complianceRecords.officerEmail' }} </th>
+          <th> {{ i18n 'complianceRecords.status' }} </th>
+          <th> {{ i18n 'complianceRecords.date' }} </th>
+        </tr>
+        {{#each reviewRecord in this.records}}
+          <tr>
+            <td> {{ reviewRecordReviewerFullname reviewRecord }}  </td>
+            <td> {{ reviewRecordReviewerEmail reviewRecord }} </td>
+            <td> {{ getTranslatedStatus reviewRecord }} </td>
+            <td> {{ formatDate reviewRecord.createdAt }} </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/if}}
+</Template>

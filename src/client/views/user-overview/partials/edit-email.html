@@ -1,0 +1,10 @@
+<template name="editEmail">
+  {{#autoForm id="editEmailForm" schema=emailEditSchema type="method" meteormethod="edit/email" formErrorVar=formErrorVar successHandler=successHandler }}
+      {{> afQuickField type="hidden" name="userId" value=doc._id}}
+      {{> afQuickField name="email"}}
+      {{> afQuickField name="emailCheck"}}
+
+      {{> aFormErrors formId="editEmailForm" errors=formError }}
+      <button type="submit" class="btn btn-primary update-email">{{i18n 'userInfo.editEmail.save'}}</button>
+  {{/autoForm}}
+</template>

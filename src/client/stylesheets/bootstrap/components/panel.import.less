@@ -1,0 +1,40 @@
+
+.panel {
+
+  .panel-heading:has-child(.text-left) {
+    position: relative;
+  }
+
+  .panel-heading {
+
+    h1 {
+      margin: 0;
+    }
+
+    .text-left {
+      position: absolute;
+      top: 45px;
+      left: 40px;
+    }
+  }
+
+  .panel-body {
+    border-radius: 0 0 @panel-border-radius @panel-border-radius;
+  }
+
+  .alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border: 1px solid #faebcc
+  }
+
+  .alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    i {
+      padding-top: 6px;
+      font-size: 30px;
+    }
+  }
+}

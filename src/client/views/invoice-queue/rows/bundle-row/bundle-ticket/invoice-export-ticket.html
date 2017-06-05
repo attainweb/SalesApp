@@ -1,0 +1,22 @@
+<Template name="invoiceExportTicket">
+  <table class="table data-table">
+    <thead>
+      <tr>
+        <td>{{ i18n 'exportPaidInvoices.table.finalizedAt' }}</td>
+        <td>{{ i18n 'exportPaidInvoices.table.exportId' }}</td>
+        <td>{{ i18n 'exportPaidInvoices.table.holdingWallet' }}</td>
+        <td>{{ i18n 'exportPaidInvoices.table.count' }}</td>
+        <td> {{ i18n 'exportPaidInvoices.table.totalAmount' }}</td>
+      </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td>{{ formatDate ticket.finalizedAt }}</td>
+         <td>{{ ticket._id}}</td>
+         <td>{{ ticket.holdingWalletAddress }}</td>
+         <td>{{ count ticket.invoiceTicketIds }}</td>
+         <td>{{ formatCurrency 'BTC' (satoshisToBtc ticket.batchFulfillmentAmount) }} BTC</td>
+       </tr>
+     </tbody>
+  </table>
+</Template>

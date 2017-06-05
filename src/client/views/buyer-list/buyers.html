@@ -1,0 +1,41 @@
+<template name="buyers">
+<div id="buyers-screen" class="data-screen">
+
+    <header>
+
+        <div class="headline">
+            <h1>{{i18n "buyers.headline"}}</h1>
+            {{#if showAddBuyerButton}}
+                <button class="add-buyer">{{i18n "buyers.addBuyer"}}</button>
+            {{/if}}
+        </div>
+
+        <p class="buyers-count">
+          {{i18n "buyers.count" buyersCount}}
+        </p>
+
+
+        <a href="#" class="toggle-all">
+            {{#if areAllOpen}}
+                {{i18n "buyers.closeAll"}}
+            {{else}}
+                {{i18n "buyers.openAll"}}
+            {{/if}}
+        </a>
+
+
+    </header>
+
+    <div class="buyers-list">
+        {{#each buyer in currentUser.buyers}}
+            <div class="row">
+                {{> buyerPanel buyer=buyer isOpen=areAllOpen }}
+            </div>
+        {{/each}}
+    </div>
+
+    {{#if hasMoreToLoad}}
+        <div class="load-more-results">{{> spinner}}</div>
+    {{/if}}
+</div>
+</template>

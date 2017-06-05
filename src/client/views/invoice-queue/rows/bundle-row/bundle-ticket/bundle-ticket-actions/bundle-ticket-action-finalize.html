@@ -1,0 +1,59 @@
+<Template name="bundleTicketActionFinalize">
+  <div class="bundle_ticket_action_finalize">
+    <div class="row">
+      <div class="col-sm-2">
+        <nav class="nav nav-pills nav-stacked" >
+          <li class="nav-item {{getActivePillClass 'YEN'}}">
+            <a class="nav-link set-strategy-button" data-strategy="YEN"> YEN -> BTC </a>
+          </li>
+          <li class="nav-item {{getActivePillClass 'USD'}}">
+            <a class="nav-link set-strategy-button" data-strategy="USD"> USD -> BTC </a>
+          </li>
+        </nav>
+      </div>
+      <form>
+        <div class="col-sm-3">
+          
+            {{# if isYENStrategy }}     
+              {{> currency_amount_input 
+                  textIcon=(i18n 'paymentExports.btcUsd')
+                  min=minValue
+                  step=step 
+                  onValidData=onValidAmountBtcUsd 
+                  onInvalidData=onInvalidAmount }}
+                      
+              {{> currency_amount_input 
+                  textIcon=(i18n 'paymentExports.btcJpy')
+                  min=minValue
+                  step=step 
+                  onValidData=onValidAmountBtcJpy 
+                  onInvalidData=onInvalidAmount }} 
+            {{/ if }}
+              
+            {{# if isUSDStrategy }}  
+              {{> currency_amount_input 
+                  textIcon=(i18n 'paymentExports.btcUsd')
+                  min=minValue
+                  step=step 
+                  onValidData=onValidAmountBtcUsd 
+                  onInvalidData=onInvalidAmount }}
+                    
+              {{> currency_amount_input 
+                  textIcon=(i18n 'paymentExports.jpyUsd')
+                  min=minValue
+                  step=step 
+                  onValidData=onValidAmountJpyUsd
+                  onInvalidData=onInvalidAmount }} 
+            {{/ if }}  
+                                          
+        </div>
+
+        <div class="col-sm-2">
+          <button type="submit" class="btn btn-primary export-paid-invoice" disabled="disabled">
+            {{ i18n 'exportPaidInvoices.buttons.finalize' }}
+          </button>
+        </div>
+      </form> 
+    </div>
+  </div>
+</template>

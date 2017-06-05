@@ -1,0 +1,103 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+# =============================================================
+# Meteor core packages (correct versions picked by Meteor tool)
+# =============================================================
+
+meteor-base@1.0.4
+mobile-experience@1.0.4
+accounts-base@1.2.14
+accounts-password@1.3.3
+accounts-ui@1.1.9
+ecmascript@0.6.1
+random@1.0.10
+http@1.2.10
+less@2.7.8
+mongo@1.1.14
+blaze-html-templates
+session@1.1.7
+jquery@1.11.10
+tracker@1.1.1
+logging@1.1.16
+reload@1.1.11
+ejson@1.0.13
+spacebars
+check@1.2.4
+sha@1.0.9
+force-ssl@1.0.13
+standard-minifier-css@1.3.2
+standard-minifier-js@1.2.1
+reactive-var@1.0.11
+shell-server
+
+# =============================================================
+# 3rd party packages (always specify explicit version!)
+# =============================================================
+
+alanning:roles@1.2.15
+aldeed:autoform@5.8.1
+aldeed:autoform-bs-datepicker@1.1.1
+craphtex:autoform-wizard@0.9.1
+craphtex:autoform-wizard-iron-router@0.1.4
+aldeed:simple-schema@1.5.3
+aldeed:collection2@2.9.1
+anti:i18n@0.4.3
+ca333:bitcoinjs@1.6.0
+classcraft:meteor-wkhtmltopdf@0.3.1
+dburles:collection-helpers@1.0.4
+reactive-dict@1.1.8
+simple:reactive-method@1.0.2
+space:template-controller@0.3.0
+iron:router@1.0.12
+rajit:bootstrap3-datepicker@1.5.1
+jparker:crypto-core@0.1.0
+jparker:crypto-sha256@0.1.1
+jparker:crypto-md5@0.1.1
+jparker:crypto-aes@0.1.0
+mizzao:bootboxjs@4.4.0
+meteorhacks:ssr@2.2.0
+momentjs:moment@2.13.1
+sacha:spin@2.3.1
+zimme:active-route@2.3.2
+huttonr:bootstrap3@3.3.6_13
+edgee:slingshot@0.7.1
+peerlibrary:aws-sdk@2.2.42_1
+tmeasday:publish-counts@0.7.3
+jjman505:wheelzoom@1.0.0
+stevezhu:lodash@3.10.1
+ongoworks:security@1.3.0
+natestrauser:statemachine@2.3.5
+numeral:numeral@1.5.3_1
+jjman505:bitcoin-address@0.1.0
+jjman505:moment-business@2.0.0
+meteorhacks:kadira@2.30.0
+reywood:publish-composite@1.4.2
+matb33:collection-hooks@0.8.1
+vsivsi:job-collection@1.3.3
+rzymek:moment-locale-ja@2.12.0
+percolate:migrations@0.9.8
+gwendall:simple-schema-i18n@0.2.1
+gwendall:autoform-i18n@0.1.9_1
+froatsnook:sleep@1.2.0
+sales:invoice-manager
+meteorhacks:subs-manager@1.6.4
+meteorhacks:kadira-profiler@1.3.0
+u2622:persistent-session@0.4.4
+tsega:bootstrap3-datetimepicker@4.17.37_1
+icellan:sjcl@1.2.0
+meteorhacks:aggregate
+
+# =============================================================
+# TESTING packages - 3rd party (specify explicit version!)
+# =============================================================
+
+practicalmeteor:mocha@2.4.6-rc.3
+practicalmeteor:chai@2.1.0_1
+dburles:factory@1.1.0
+xolvio:backdoor@0.2.0
+xolvio:cleaner@0.3.1
+practicalmeteor:mocha-xunit-reporter

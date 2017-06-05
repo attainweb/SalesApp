@@ -1,0 +1,45 @@
+<template name="addComplianceOfficer">
+    <div class="row">
+        <form id="add-compliance-officer-form" action="action">
+            <div class="panel-wrapper" {{notifAttrs}}>
+                {{> notificationPanel message=flash}}
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="text-center">{{ i18n 'addComplianceOfficer.title' }}</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="name">{{ i18n 'addComplianceOfficer.name' }}</label>
+                            <input type="name" class="form-control" id="admin-name">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="email">{{ i18n 'addComplianceOfficer.email' }}</label>
+                            <input type="email" class="form-control" id="admin-email">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="name">{{ i18n 'addComplianceOfficer.password' }}</label>
+                            <input type="password" class="form-control" id="admin-password">
+                        </div>
+                    </div>
+
+                    <div class="row text-center">
+                        <div class="form-group">
+                            {{#button id="btn-signup" type="submit" class="btn btn-primary" waitOn=btnWaiting}}
+                                <i class="icon-hand-right"></i>{{i18n 'addComplianceOfficer.button'}}
+                            {{/button}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</template>
+

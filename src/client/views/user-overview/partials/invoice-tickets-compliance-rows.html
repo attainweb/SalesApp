@@ -1,0 +1,15 @@
+<Template name="invoiceTicketsComplianceRows">
+  <div class = "invoice-items">
+    <div class ="row">
+      <div class = "data-panel">
+        {{# ticket_card 
+            cardTypeTemplate='invoice_ticket'
+            ticket=getInvoice
+            cardId=getInvoice.ticket.invoiceNumber
+            hasContent=hasContent }}
+          {{> invoiceTicketActionCancel invoice=invoice }}
+        {{/ ticket_card}}
+      </div>
+    </div>
+  </div>
+</Template>

@@ -1,0 +1,125 @@
+#invoice_queue {
+  .invoice-items {
+    border-radius: 0px;
+    width: ~"calc(100% - 40px)";
+    margin-left: auto;
+    margin-right: auto;
+    .bundle_ticket_action_finalize {
+      .input-group {
+        margin-bottom: 5px;
+      }
+      .input-group-addon {
+        min-width: 100px;
+      }
+      .nav-item {
+        cursor: pointer;
+      }
+    }
+    .invoice_ticket_action_update_comment {
+      
+      .comment-box textarea {
+        resize: vertical;
+        margin-bottom: 12px;
+        width: 100%;
+        height: auto;
+      }
+      
+      .comment-box h4 {
+        color: #009ee0;
+      }
+
+      .comment-box p {
+        color: #333333;
+        width: auto;
+        height: auto;
+      }
+      
+    }
+  }
+  .row {
+    .data-panel {
+      margin-bottom: 10px;
+    }
+  }
+  .data-table {
+    width: 100%;
+    margin-bottom: 0;
+    td {
+      border-width: 0px;
+    }
+    tbody {
+      .name {
+        width: 20%;
+        min-width: 10em;
+      }
+      .invoice-number {
+        width: 7em
+      }
+      .payment-option {
+        width: 8em
+      }
+      .compliance-status {
+        width: 5em
+      }
+      .created-at {
+        width: 8em
+      }
+      .usd-requested {
+        width: 8em
+      }
+      .yen-received {
+        width: 8em
+      }
+    }
+  }
+  .panel-heading .has-content {
+    width:~"calc(100% - @{toggle-button-size})";
+  }
+  .queue-filter-col {
+    .col-md-3, .col-md-4 {
+      margin-bottom: 10px;
+    }
+  }
+  .date-range-selection {
+    .date-picker-col {
+      padding: 0px;
+    }
+  }
+  // TICKET TABLE
+  .ticket-table {
+    @table-offset: @toggle-button-size + 60px;
+    width:~"calc(100% - @{table-offset})";
+    border-collapse: collapse;
+    margin: 10px 30px;
+    thead {
+      color: #7F9298;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+    tbody tr {
+      border-top: 1px dashed #B2BEC7;
+    }
+    td {
+      padding: 8px 0;
+    }
+    .status {
+      &.paid {
+        color: @approved-color;
+      }
+      &.unpaid {
+        color: @denied-color;
+      }
+    }
+  }
+}
+
+.ticket-card-panel-toggle {
+  .toggle-btn;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.approve-invalid-ticket {
+  margin-right: 8px;
+}

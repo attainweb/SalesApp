@@ -1,0 +1,21 @@
+
+<template name="adminSidebar">
+    <li class="{{isActiveRoute class='active' name='sale-overview'}}">
+        <a href="/sale-overview">{{ i18n 'sidebar.saleOverview' }}</a>
+    </li>
+    <li class="{{isActiveRoute class='active' name='partnerlink'}}">
+        <a href="/partnerlink">{{ i18n 'sidebar.generate' }}</a>
+    </li>
+    <li class="{{isActiveRoute class='active' name='viewpartnerlinks'}}">
+        <a href="/viewpartnerlinks">{{ i18n 'sidebar.view' }}</a>
+    </li>
+    <li class="{{isActiveRoute class='active' name='addComplianceOfficer'}}">
+        <a href="/addComplianceOfficer">{{ i18n 'sidebar.addAdmin' }}</a>
+    </li>
+    <li class="{{isActiveRoute class='active' name='addCustomerServiceOfficer'}}">
+        <a href="/add-customer-service-officer">{{ i18n 'sidebar.addCustomerServiceOfficer' }}</a>
+    </li>
+    <li class="{{isActiveRoute class='active' name='buyers'}}">
+        <a href="/buyers">{{ i18n 'sidebar.buyers' }}</a>
+    </li>
+</template>

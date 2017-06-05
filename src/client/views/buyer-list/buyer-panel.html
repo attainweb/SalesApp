@@ -1,0 +1,66 @@
+<template name="buyerPanel">
+<div class="buyer panel panel-default data-panel fullscreen">
+
+    <!-- BUYER INFORMATION IN PANEL HEADING -->
+    <div class="panel-heading">
+
+        <table class="buyer-table data-table">
+
+            <thead>
+                <tr>
+                    <td class="name">{{i18n "buyers.name"}}</td>
+                    <td>{{i18n "buyers.email"}}</td>
+                    <td>{{i18n "personalInformation.status.title"}}</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td class="name">{{buyer.fullName}}</td>
+                    <td class="email">{{buyer.primaryEmail}}</td>
+                    <td class="status {{buyer.personalInformation.status}}">{{showStatus}}</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <button class="toggle"
+                type="button"
+                data-toggle="collapse"
+                data-target="#buyer-{{buyer._id}}"
+                aria-expanded="false"
+                aria-controls="buyer-{{buyer._id}}">
+            {{i18n "buyers.toggleBuyersPanel"}}
+        </button>
+
+    </div>
+
+    <!-- BUYER TICKETS IN PANEL BODY -->
+    <div class="panel-collapse collapse {{#if isOpen}}in{{/if}}" id="buyer-{{buyer._id}}">
+        <table class="ticket-table">
+
+            <thead>
+                <tr>
+                    <td>{{i18n "buyers.order"}}</td>
+                    <td>{{i18n "buyers.amount"}}</td>
+                    <td>{{i18n "buyers.method"}}</td>
+                    <td>{{i18n "buyers.date"}}</td>
+                    <td class="status">{{i18n "buyers.status"}}</td>
+                </tr>
+            </thead>
+
+            <tbody>
+            {{#each currentUser.buyerTickets buyer._id}}
+                <tr class="ticket">
+                    <td>{{invoiceNumber}}</td>
+                    <td>{{formatCurrency 'USD' usdRequested}}</td>
+                    <td>{{paymentOption}}</td>
+                    <td>{{formatDateTime updatedAt}}</td>
+                    <td class="status {{stateClass this}}">{{stateLable this}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+  </div>
+</template>

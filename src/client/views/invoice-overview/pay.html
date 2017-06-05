@@ -1,0 +1,24 @@
+<template name="pay">
+  <div class="pay panel panel-default fullscreen">
+    <div class="panel-body">
+
+      {{#with getTicket}}
+          <div class="pay">
+            <div id="header">
+              <h1>{{ headerFor paymentOption }}</h1>
+            </div>
+            
+            {{> Template.dynamic template=(getTemplateName paymentOption) data=this}}
+
+            <p class="lead">
+              <strong class="warning">{{ i18n 'pay.warning' }}</strong>
+              {{ i18n 'pay.warningText' }}
+            </p>
+          </div>
+      {{else}}
+        <h1>{{ i18n 'pay.noTicketFound' }}</h1>
+      {{/with}}
+
+    </div>
+  </div>
+</template>

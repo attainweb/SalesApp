@@ -1,0 +1,96 @@
+<template name="saleOverview">
+<div id="sale-overview-screen" class="data-screen">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 class="text-center">{{ i18n 'saleOverview.settings.title' }}</h1>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <form>
+              <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-6 form-control-label">{{ i18n 'saleOverview.settings.currentTranche'}}</label>
+                <div class="col-sm-6">
+                  {{currentTranche}}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6 form-control-label">{{ i18n 'saleOverview.settings.salesStarted'}}</label>
+                <div class="col-sm-6 {{salesStartedCSS}}">
+                  <i class="fa {{salesStartedIcon}}"></i> {{salesStartedText}}
+                </div>
+              </div>              
+              <div class="form-group row">
+                <label for="inputPassword3" class="col-sm-6 form-control-label" id="total-amount-available">{{ i18n 'saleOverview.totalAmountAvailable'}}</label>
+                <div class="col-sm-6">
+                  {{formatCurrency 'USD' taa}}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword3" class="col-sm-6 form-control-label" id="overcapacity-treshold">{{ i18n 'saleOverview.overcapacityTreshold'}}</label>
+                <div class="col-sm-6">
+                  {{oct}}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword3" class="col-sm-6 form-control-label" id="amount-invoiced-and-paid">{{ i18n 'saleOverview.settings.amountInvoicedAndPaid'}}</label>
+                <div class="col-sm-6">
+                  {{formatCurrency 'USD' aipSum}} ({{ i18n 'saleOverview.settings.tickets'}} : {{aipCount}})
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword3" class="col-sm-6 form-control-label" id="amount-paid">{{ i18n 'saleOverview.settings.amountPaid'}}</label>
+                <div class="col-sm-6">
+                  {{formatCurrency 'USD' apSum}} ({{ i18n 'saleOverview.settings.tickets'}} : {{apCount}})
+                </div>
+              </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 class="text-center">{{ i18n 'saleOverview.simulator.title'}}</h1>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <form>
+              <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-6 form-control-label">{{ i18n 'saleOverview.totalAmountAvailable'}}</label>
+                <div class="col-sm-6">
+                  <input type="number" class="form-control" name="taa" value="1000">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword3" class="col-sm-6 form-control-label">{{ i18n 'saleOverview.overcapacityTreshold'}}</label>
+                <div class="col-sm-6">
+                  <input type="number" class="form-control" name="oct" value="0.1" min=0 max=1 step=0.001>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-offset-6 col-sm-6">
+                  <button type="submit" class="btn btn-secondary">{{ i18n 'saleOverview.simulator.simulate'}}</button>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div class="row">
+          {{ i18n 'saleOverview.simulator.totalTickets'}}: {{simTickets.length}} | OCT: {{oct}} | AIP: {{simAip}} | AP: {{simAp}}
+        </div>
+
+        {{#each simTickets}}
+        <div class="col-sm-2 row">
+          {{amount}}
+        </div>
+        <div class="col-sm-offset-2 col-sm-10 row">
+          {{curState}}
+        </div>
+        {{/each}}
+
+
+
+    </div>
+  </div>
+
+</div>
+</template>

@@ -1,0 +1,98 @@
+<template name="accountInfoPanel">
+<div class="account-info-panel panel panel-default">
+
+  <div class="panel-heading">
+
+    <h1>{{ i18n 'accountInfo.account.title' }}</h1>
+
+    <!-- Nav tabs -->
+    <ul class="nav tabs" role="tablist">
+
+      <li role="presentation" class="active">
+        <a href="#information" aria-controls="information" role="tab">
+          {{ i18n 'accountInfo.tabs.information' }}
+        </a>
+      </li>
+      <li role="presentation">
+        <a href="#agreements" aria-controls="agreements" role="tab">
+          {{ i18n 'accountInfo.tabs.agreements' }}
+        </a>
+      </li>
+
+    </ul>
+
+  </div>
+
+  <div class="panel-body">
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+      <div role="tabpanel" class="tab-pane active" id="information">
+
+        <section class="info account-name">
+          <h2 class="heading">{{i18n 'accountInfo.account.name'}}</h2>
+          <p class="content">{{personalInformation.surname}} {{personalInformation.name}}</p>
+        </section>
+
+        <section class="info account-email">
+          <h2 class="heading">{{i18n 'accountInfo.account.email'}}</h2>
+          <p class="content">{{primaryEmail}}</p>
+          {{#if canEditEmail}}
+            <button id="update-email-button" class="btn btn-primary" data-toggle="modal" data-target="#update-email-address">{{i18n 'accountInfo.account.updateEmail'}}</button>
+            {{> updateEmailAddress}}
+          {{/if}}
+        </section>
+
+        <section class="info account-status">
+          <h2 class="heading">{{i18n 'accountInfo.account.status'}}</h2>
+          <p class="content">{{showStatus}}</p>
+        </section>
+        
+        {{#if personalInformation.walletAddress}}
+          <section class="info account-walletAddress">
+            <h2 class="heading">{{i18n 'accountInfo.account.walletAddress'}}</h2>
+            <div class="commission-wallet-wrapper">
+              <a class="wallet-address" href="https://blockchain.info/address/{{personalInformation.walletAddress}}">{{personalInformation.walletAddress}}</a>
+              <button id="update-wallet-address-button" class="btn btn-primary" data-toggle="modal" data-target="#update-wallet-address">{{i18n 'accountInfo.account.updateWalletAddress'}}</button>
+            </div>
+          </section>
+					{{> updateWalletAddress}}
+        {{/if}}
+
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="agreements">
+
+        <h2 class="heading">{{ i18n 'policyLinks.linksTitle' }}</h2>
+
+        <ul class="agreed-terms">
+          <li>
+            {{> policiesByRegion
+              userRole=getUserRole
+              distlevel=getUserDistLevel
+              policyName="TOC"
+              residenceCountry=getUserResidenceCountry }}
+          </li>
+          {{#if currentUser.isBuyer}}
+            <li>
+            {{> policiesByRegion
+                userRole=getUserRole
+                policyName="RISK"
+                residenceCountry=getUserResidenceCountry }}
+            </li>
+          {{/if}}
+          <li>
+           {{> policiesByRegion
+              userRole=getUserRole
+              policyName="PRIVACY"
+              residenceCountry=getUserResidenceCountry }}
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+</template>

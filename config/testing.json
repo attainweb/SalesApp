@@ -1,0 +1,295 @@
+{
+  "public": {
+    "salesOver": false,
+    "development": true, "testing": true,
+    "salesStarted": true,
+    "expireTickets": {
+      "bank": {
+        "afterInvoiceSent": {
+          "days": 3,
+          "businessDays": true
+        }
+      },
+      "btc": {
+        "afterInvoiceSent": {
+          "days": 3,
+          "businessDays": false
+        }
+      }
+    },
+    "acceptInviteBtcTimer": 600,
+    "minUsdOrderValue": 1,
+    "persistent_session": {
+      "default_method": "persistent"
+    },
+    "salesLimits": {
+      "currentTranche": "t4",
+      "tranches": {
+        "t1": {},
+        "t2": {},
+        "t3": {},
+        "t3.5": {},
+        "t4": { "totalAmountAvailable": 25000000, "overCapacityTolerance": 0.12 }
+      }
+    },
+    "availableCountries": ["JP", "KH", "CN", "HK", "KR", "MY", "PH", "SG", "TW", "TH", "VN", "US"],
+    "availableLanguages": ["en", "ja", "ko", "zh"],
+    "residenceCountriesAllowedSale": ["JP", "KR"],
+    "support": {
+      "ja": {
+        "email": "SUPPORT_EMAIL"  
+      },
+      "ko": {
+        "email": "SUPPORT_EMAIL"
+      },
+      "default": {
+        "email": "SUPPORT_EMAIL"
+      }
+    },
+    "productName": {
+      "en":  "Product Name",
+      "ja":  "Product Name",
+      "ko":  "Product Name",
+      "zh":  "Product Name"
+    },
+    "companyInformation": {
+      "en": {
+        "name": "Company Name",
+        "address": "Company Address",
+        "phone": "Company Phone",
+        "urls": {
+          "home": "Home Url",
+          "identification": "Identification Url",
+          "bankTerms": "Bank Terms"
+        },
+        "socialAccounts": {
+          "line": "Line Account",
+          "facebook": "Facebook Url"
+        },
+        "bankAccounts": [{
+          "name": "Bank Name",
+          "branchName": "Branch Name",
+          "accountType": "Account Type",
+          "accountNumber": "Bank Account number",
+          "transferDestination": "Transfer Destination"
+        },
+        {
+          "name": "Bank Name 2",
+          "branchName": "Branch Name 2",
+          "accountType": "Account Type 2",
+          "accountNumber": "Bank Account number 2",
+          "transferDestination": "Transfer Destination 2"
+        }]
+      },
+      "ja": {
+        "name": "Company Name",
+        "address": "Company Address",
+        "phone": "Company Phone",
+        "urls": {
+          "home": "Home Url",
+          "identification": "Identification Url",
+          "bankTerms": "Bank Terms"
+        },
+        "socialAccounts": {
+          "line": "Line Account",
+          "facebook": "Facebook Url"
+        },
+        "bankAccounts": [{
+          "name": "Bank Name",
+          "branchName": "Branch Name",
+          "accountType": "Account Type",
+          "accountNumber": "Bank Account number",
+          "transferDestination": "Transfer Destination"
+        },
+        {
+          "name": "Bank Name 2",
+          "branchName": "Branch Name 2",
+          "accountType": "Account Type 2",
+          "accountNumber": "Bank Account number 2",
+          "transferDestination": "Transfer Destination 2"
+        }]
+      },
+      "ko": {
+        "name": "Company Name",
+        "address": "Company Address",
+        "phone": "Company Phone",
+        "urls": {
+          "home": "Home Url",
+          "identification": "Identification Url",
+          "bankTerms": "Bank Terms"
+        },
+        "socialAccounts": {
+          "line": "Line Account",
+          "facebook": "Facebook Url"
+        },
+        "bankAccounts": [{
+          "name": "Bank Name",
+          "branchName": "Branch Name",
+          "accountType": "Account Type",
+          "accountNumber": "Bank Account number",
+          "transferDestination": "Transfer Destination"
+        },
+        {
+          "name": "Bank Name 2",
+          "branchName": "Branch Name 2",
+          "accountType": "Account Type 2",
+          "accountNumber": "Bank Account number 2",
+          "transferDestination": "Transfer Destination 2"
+        }]
+      },
+      "zh": {
+        "name": "Company Name",
+        "address": "Company Address",
+        "phone": "Company Phone",
+        "urls": {
+          "home": "Home Url",
+          "identification": "Identification Url",
+          "bankTerms": "Bank Terms"
+        },
+        "socialAccounts": {
+          "line": "Line Account",
+          "facebook": "Facebook Url"
+        },
+        "bankAccounts": [{
+          "name": "Bank Name",
+          "branchName": "Branch Name",
+          "accountType": "Account Type",
+          "accountNumber": "Bank Account number",
+          "transferDestination": "Transfer Destination"
+        },
+        {
+          "name": "Bank Name 2",
+          "branchName": "Branch Name 2",
+          "accountType": "Account Type 2",
+          "accountNumber": "Bank Account number 2",
+          "transferDestination": "Transfer Destination 2"
+        }]
+      }
+    },
+    "regionalMappings": {
+      "JP": "regionNippon",
+      "KH": "regionCambodia",
+      "CN": "regionChina",
+      "HK": "regionHongKong",
+      "KR": "regionSouthKorea",
+      "MY": "regionMalaysia",
+      "PH": "regionPhilippines",
+      "SG": "regionSingapore",
+      "TW": "regionTaiwan",
+      "TH": "regionThailand",
+      "VN": "regionVietnam"
+    },
+    "regionalSettings": {
+      "regionNippon": {
+        "enrollment": {
+          "paymentOptions": ["bank", "btc"],
+          "paymentMinimum": 1000
+        },
+        "latestPolicyUpdate": {
+          "buyer": {
+            "TOC": "2015-10-08"
+          },
+          "distributor": {
+            "0": "2017-03-07",
+            "1": "2017-03-07",
+            "2": "2017-03-07",
+            "3": "2017-03-07"
+          },
+          "PRIVACY": "2015-10-01"
+        },
+        "policies": {
+          "TOC": {
+            "distributor": {
+              "0": [{ "lang": "ja", "file": "dummy.pdf" }],
+              "1": [{ "lang": "ja", "file": "dummy.pdf" }],
+              "2": [{ "lang": "ja", "file": "dummy.pdf" }],
+              "3": [{ "lang": "ja", "file": "dummy.pdf" }]
+            },
+            "buyer": [{
+              "lang": "ja",
+              "file": "dummy.pdf"
+            }],
+            "default": [{
+              "lang": "ja",
+              "file": "dummy.pdf"
+            }]
+          },
+          "RISK": {
+            "default": [{
+              "lang": "ja",
+              "file": "dummy.pdf"
+            }]
+          },
+          "PRIVACY": {
+            "default": [{
+              "lang": "ja",
+              "file": "dummy.pdf"
+            }]
+          }
+        }
+      },
+      "regionCambodia": {
+        "enrollment": { "paymentOptions": ["btc"], "paymentMinimum": 500 }
+      },
+      "regionChina": {
+        "enrollment": { "paymentOptions": ["btc"], "paymentMinimum": 1000 }
+      },
+      "regionHongKong": {
+        "enrollment": { "paymentOptions": ["btc"], "paymentMinimum": 1000 }
+      },
+      "regionSouthKorea": {
+        "enrollment": { "paymentOptions": ["btc"], "paymentMinimum": 500 }
+      },
+      "regionMalaysia": {
+        "enrollment": { "paymentOptions": ["btc"], "paymentMinimum": 500 }
+      },
+      "regionPhilippines": {
+        "enrollment": { "paymentOptions": ["btc"], "paymentMinimum": 500 }
+      },
+      "regionSingapore": {
+        "enrollment": { "paymentOptions": ["btc"], "paymentMinimum": 1000 }
+      },
+      "regionTaiwan": {
+        "enrollment": { "paymentOptions": ["btc"], "paymentMinimum": 500 }
+      },
+      "regionThailand": {
+        "enrollment": { "paymentOptions": ["btc"], "paymentMinimum": 500 }
+      },
+      "regionVietnam": {
+        "enrollment": { "paymentOptions": ["btc"], "paymentMinimum": 500 }
+      },
+      "regionOther": {
+        "enrollment": { "paymentOptions": ["btc"], "paymentMinimum": 1000 }
+      }
+    }
+  },
+
+  "dollarsPerProduct": 0.0026,
+  "disableJobCollectionLogger": true,
+
+  "SLINGSHOT_S3_BUCKET": "<SLINGSHOT_S3_BUCKET>",
+  "SLINGSHOT_MAX_FILE_SIZE_MB": 10,
+  "SLINGSHOT_S3_REGION": "<SLINGSHOT_S3_REGION>",
+
+  "AWSAccessKeyId": "<AWSAccessKeyId>",
+  "AWSSecretAccessKey": "<AWSSecretAccessKey>",
+  "SALES_APP_AUTH_API_TOKEN": "<SALES_APP_AUTH_API_TOKEN>",
+
+  "btcPriceCriteria": {
+    "providersRanking": [
+      "bitstamp",
+      "blockchain",
+      "bitpay",
+      "bitgo",
+      "bitfinex",
+      "kraken"
+    ],
+    "outdatedMaxToleranceInMinutes": 2
+  },
+
+  "loggly": {
+    "enabled": false,
+    "token": "this.is.just.a.fake.token",
+    "subdomain": "localhost"
+  }
+}

@@ -1,0 +1,53 @@
+.account-info-panel {
+
+  .panel-heading {
+    padding-bottom: 0;
+    background-color: white;
+    h1 {
+      margin-bottom: 1em;
+    }
+  }
+
+  .panel-body {
+    background-color: #f1f5f8;
+  }
+
+  .heading {
+    margin-top: 0;
+    @media(max-width: 550px) {
+      font-size: 20px;
+    }
+  }
+
+  .info {
+    margin-bottom: 1em;
+    word-break: break-all;
+    .dotted-borders(0 0 10px 0);
+
+    &:last-child {
+      border: none;
+      margin-bottom: 0;
+    }
+
+    .content {
+      font-size: 16px;
+      color: #547a98;
+    }
+  }
+
+  #agreements {
+    .agreed-terms {
+      padding-left: 1.2em;
+    }
+  }
+
+	.commission-wallet-wrapper {
+		display: flex;	
+	}
+
+	.commission-wallet-wrapper button {
+    margin-left: 20px;
+    position: relative;
+    top: -0.6em;
+	}
+}

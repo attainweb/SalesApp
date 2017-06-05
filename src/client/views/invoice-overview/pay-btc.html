@@ -1,0 +1,26 @@
+<template name="payBtc">
+  {{#if countdownExpiredFor satoshisExpectedAt}}
+    {{> loading}}
+  {{else}}
+    <div class="row btc-address">
+      <div class="col-md-6">{{ i18n 'payBtc.btcAddress' }}</div>
+      <div class="col-md-6"><p class="btcAddress"><strong>{{btcAddress}}</strong></p></div>
+    </div>
+
+    <div class="row usd-requested">
+      <div class="col-md-6">{{ i18n 'pay.usdRequested' }}</div>
+      <div class="col-md-6"><p class="usdRequested"><strong>{{formatCurrency 'USD' usdRequested}}</strong></p></div>
+    </div>
+
+    <div class="row expected-price">
+      <div class="col-md-6">{{ i18n 'payBtc.btcExpectedPrice' }}</div>
+      <div class="col-md-6"><p><strong>{{formatAndCheck 'USD' btcExpectedPrice}}</strong></p></div>
+    </div>
+
+    <div class="row btc-expected">
+      <div class="col-md-6">{{ i18n 'payBtc.btcExpected' }}</div>
+      <div class="col-md-6"><p><strong>{{formatAndCheck 'BTC' btcExpected}}</strong></p></div>
+    </div>
+    <p class="lead">{{{timeString satoshisExpectedAt}}}</p>
+  {{/if}}
+</template>

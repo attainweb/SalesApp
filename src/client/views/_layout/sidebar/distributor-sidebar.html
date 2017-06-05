@@ -1,0 +1,26 @@
+
+<template name="distributorSidebar">
+    {{> sidebar_account_link}}
+
+    {{#if currentUser.isApproved}}
+        {{#if currentUser.hasWalletAddress}}
+            {{#if currentUser.distlevelIsLTE 2}}
+                <li class="{{isActiveRoute class='active' name='distref'}}">
+                    <a href="/distref">{{ i18n 'sidebar.distributor' }}</a>
+                </li>
+            {{/if}}
+            <li class="{{isActiveRoute class='active' name='buyerref'}}">
+                <a href="/buyerref">{{ i18n 'sidebar.buyer' }}</a>
+            </li>
+            <li class="{{isActiveRoute class='active' name='buyers'}}">
+                <a href="/buyers">{{ i18n 'sidebar.buyers' }}</a>
+            </li>
+            <li class="{{isActiveRoute class='active' name='commissions'}}">
+                <a href="/commissions">{{ i18n 'sidebar.commissions' }}</a>
+            </li>
+            <li class="{{isActiveRoute class='active' name='viewlinks'}}">
+                <a href="/viewlinks">{{ i18n 'sidebar.links' }}</a>
+            </li>
+        {{/if}}
+    {{/if}}
+</template>

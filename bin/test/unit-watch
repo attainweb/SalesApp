@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+echo "Sourcing ./bin/env/testing.sh as environment …"
+source ./bin/env/testing.sh
+source ./bin/env/testing-unit-addons.sh
+cd ./src
+echo "Watch unit tests at http://localhost:3300"
+meteor test --port 3300 --driver-package practicalmeteor:mocha --settings ../config/testing.json

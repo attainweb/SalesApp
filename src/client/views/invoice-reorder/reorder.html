@@ -1,0 +1,74 @@
+<template name="reorder">
+  <div class="reorder panel panel-default">
+    <div class="panel-body">
+      <h1 class="text-center">{{i18n 'reorder.title'}}</h1>
+      {{#if unknownBuyer}}
+        <div class="form group" data-required="true">
+          <label class="control-class">{{ i18n 'reorder.language' }}</label>
+          {{> languageSelector class="form-control" }}
+        </div>
+      {{/if}}
+      {{#autoForm schema=reorderSchema id="reorderForm" type="method" meteormethod="reorderProduct" formErrorVar=formErrorVar}}
+      <fieldset>
+        {{#if unknownBuyer}}
+          {{> afQuickField name='email' value=prefillEmail}}
+        {{else}}
+          {{> afQuickField name='email' value=prefillEmail type='hidden'}}
+        {{/if}}
+        {{#if policiesAvailable}}
+        {{> afQuickField name='productAmount'}}
+        {{/if}}
+
+        {{#if showPaymentMethods}}
+          {{> afQuickField name='paymentMethod'}}
+        {{else}}
+
+          {{> afQuickField name='paymentMethod' type="hidden" value="Btc"}}
+        {{/if}}
+        <div class="col-sm-12">
+          {{> policiesByRegion
+            userRole="buyer"
+            policyName="TOC"
+            residenceCountry=selectedResidenceCountry
+            options=tocPoliciesByRegionOptions
+          }}
+          {{#if policiesAvailable }}
+            {{> afQuickField name="acceptToc"}}
+          {{/if}}
+        </div>
+
+        <div class="col-sm-12 {{hiddenIfDistributor}}">
+          {{> policiesByRegion
+            userRole="buyer"
+            policyName="RISK"
+            residenceCountry=selectedResidenceCountry
+            options=riskPoliciesByRegionOptions
+          }}
+          {{#if policiesAvailable }}
+            {{> afQuickField name="acceptRisk"}}
+          {{/if}}
+
+          {{#if policiesError }}
+            <div id="policies-error">
+              {{> aFormErrors formId="reorderForm" errors=policyErrorDesc }}
+            </div>
+          {{/if}}
+        </div>
+
+      </fieldset>
+      <div class="has-error">
+        <span class="help-block" data-error="{{formError}}" id="form-error">{{i18n formError}}</span>
+      </div>
+      {{#if emailConfirmed}}
+        <button type="submit" class="btn btn-primary">{{submitBtnContent}}</button>
+        {{#if unknownBuyer}}
+          <button type="button" class="btn btn-default reset">{{ i18n 'reorder.reset' }}</button>
+        {{/if}}
+      {{else}}
+        <button type="submit" class="btn btn-primary" disabled>{{submitBtnContent}}</button>
+        <button type="button" class="btn btn-primary confirmEmailBtn">{{ i18n 'reorder.confirmEmail' }}</button>
+      {{/if}}
+      {{/autoForm}}
+    </div>
+  </div>
+</template>

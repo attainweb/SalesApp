@@ -1,0 +1,11 @@
+<template name="userSummary">
+  <tr class={{rowClass}} data-index={{index}}>
+    {{> userSummaryItem }}
+    <td>
+      {{#if containsUser user.personalInformation.watchedBy}}
+        <button class="btn btn-info unwatch-btn">{{i18n 'userSummary.unwatch'}}</button>
+      {{/if}}
+      <button class="btn btn-default review-btn" {{reviewDisabled}}>{{i18n 'userSummary.review'}}</button>
+    </td>
+  </tr>
+</template>

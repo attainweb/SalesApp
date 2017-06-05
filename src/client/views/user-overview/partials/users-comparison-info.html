@@ -1,0 +1,110 @@
+<template name="usersComparisonInfo">
+    <table class="user-info table table-bordered table-striped table-condensed">
+        <tbody>
+        <tr>
+            <td class="id-lbl">ID</td>
+            <td>{{_id}}</td>
+        </tr>
+        <tr>
+            <td class="accountType-lbl">{{ i18n 'userInfo.accountType' }}</td>
+            <td>{{accountTypeText}}, {{role}}</td>
+        </tr>
+        {{#if isCompany }}
+            <tr>
+                <td class="companyName-lbl">{{ i18n 'userInfo.companyName' }}</td>
+                <td>{{personalInformation.companyName}}</td>
+            </tr>
+            <tr>
+                <td class="registrationDate-lbl">{{ i18n 'userInfo.registrationDate' }}</td>
+                <td>{{registrationDateText}}</td>
+            </tr>
+        {{/if}}
+        <tr>
+            <td class="name-lbl">{{ i18n 'userInfo.name' }}</td>
+            <td>
+                <span class="surname">{{surname}}</span> <span class="name">{{firstName}}</span>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td class="email-lbl">{{ i18n 'userInfo.email' }}</td>
+            <td>
+                <span class="email">{{primaryEmail}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="status-lbl">{{ i18n 'userInfo.status' }}</td>
+            <td>
+                <span class="status">{{personalInformationStatus}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="birthdate-lbl">{{ i18n 'userInfo.birthdate' }}</td>
+            <td>
+                <span class="birthdate">{{birthdateText}}</span>
+            </td>
+        </tr>
+        {{#if isDistributor}}
+            <tr>
+                <td class="distlevel-lbl">{{ i18n 'userInfo.distlevel' }}</td>
+                <td>{{distlevel}}</td>
+            </tr>
+        {{/if}}
+        {{#if isBuyer}}
+            <tr>
+                <td class="complianceLevels-lbl">{{ i18n 'userInfo.complianceLevels' }}</td>
+                <td>{{complianceLevel}} / {{applyingForComplianceLevel}}</td>
+            </tr>
+        {{/if}}
+        {{#if notPartner}}
+            <tr>
+                <td class="branchPartner-lbl">{{ i18n 'userInfo.branchPartner' }}</td>
+                <td>{{branchPartner}}</td>
+            </tr>
+            <tr>
+                <td class="referredBy-lbl">{{ i18n 'userInfo.referredBy' }}</td>
+                <td>{{originator}}</td>
+            </tr>
+        {{/if}}
+        <tr>
+            <td class="createdAt-lbl">{{ i18n 'userInfo.createdAt' }}</td>
+            <td>{{formatDate createdAt}}</td>
+        </tr>
+        <tr>
+            <td class="enrollmentClientIP-lbl">{{ i18n 'userInfo.enrollmentClientIP' }}</td>
+            <td>{{enrollmentIp}}{{state.ipRegionInfo}}</td>
+        </tr>
+        <tr>
+            <td class="phone-lbl">{{ i18n 'userInfo.phone' }}</td>
+            <td>
+                <span class="phone">{{personalInformation.phone}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="language-lbl">{{ i18n 'userInfo.language' }}</td>
+            <td>
+                <span class="language">{{personalInformation.language}}</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="residenceCountry-lbl">{{ i18n 'userInfo.residenceCountry' }}</td>
+            <td>
+                <span class="residence-country">{{getTranslatedResidenceCountry}}</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="address-lbl">{{ i18n 'userInfo.address' }}</td>
+            <td>
+                {{> queueAddress personalInformation.postaddress}}
+            </td>
+        </tr>
+        <tr>
+            <td class="apiInvalidZip-lbl">{{ i18n 'userInfo.apiInvalidZip.label' }}</td>
+            <td>{{apiInvalidZip personalInformation.postaddress.apiInvalidZip}}</td>
+        </tr>
+        </tbody>
+    </table>
+</template>

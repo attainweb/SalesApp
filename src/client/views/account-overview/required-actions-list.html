@@ -1,0 +1,15 @@
+<template name="requiredActionsList">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="text-center">{{ i18n 'requiredActionsList.heading' }}</h1>
+            <p class="lead"> {{ i18n 'requiredActionsList.description' }} </p>
+            <ul>
+                {{#if needsWalletAddress}}
+                    <li>
+                        {{ i18n 'requiredActionsList.walletAddressNotice' }}
+                    </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</template>

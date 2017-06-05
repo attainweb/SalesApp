@@ -1,0 +1,54 @@
+#login {
+
+  width: 90%;
+  margin: 0 auto;
+  max-width: 540px;
+  margin-top: 10%;
+  padding-top: 140px;
+  background: white url('/images/dummy-logo.png') no-repeat;
+  background-position: center 40px;
+  .box-shadow(-2px 3px 5px 0px rgba(50, 50, 50, 0.33));
+
+  // Bigger than mobile
+  @media(min-width: 550px) {
+    margin-top: 90px;
+  }
+
+  .greeting {
+    // Center the greeting horizontally
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+    padding-bottom: 0.2em;
+
+    // Adjust font to be headline-like
+    font-size: 1.8em;
+    font-family: @font-family-sans-serif;
+    font-weight: @headings-font-weight;
+    .dotted-borders(0 0 10px 0); /* border-bottom only */
+
+    // Bigger than mobile
+    @media(min-width: 550px) {
+      width: 60%;
+      font-size: 2em;
+    }
+  }
+
+  .title {
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .form-group {
+    margin: 0 auto;
+    // Bigger than mobile
+    @media(min-width: 550px) {
+      width: 60%;
+    }
+  }
+
+  footer {
+    margin: 2em 0;
+  }
+}

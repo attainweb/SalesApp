@@ -1,0 +1,28 @@
+<template name="commissions">
+<div id="commissions-screen" class="data-screen">
+
+    <header>
+
+        <div class="headline">
+            <h1>{{i18n "commissions.headline"}}</h1>
+        </div>
+
+        <div class="totals">
+            <h2>TOTAL: {{formatCurrency 'BTC' (satoshisToBtc total)}}</h2>
+            <!--
+            <h3>T1: {{formatCurrency 'BTC' totals.t1}}</h3>
+            <h3>T2: {{formatCurrency 'BTC' totals.t2}}</h3>
+            -->
+        </div>
+
+    </header>
+
+    <div class="buyers-list">
+    {{#each currentUser.commissions}}
+        {{> commissionItem}}
+    {{/each}}
+    {{> loadingIndicator scrollTargetSelector='#page-content-wrapper'
+                          showIndicator=hasMoreToLoad}}
+    </div>
+</div>
+</template>

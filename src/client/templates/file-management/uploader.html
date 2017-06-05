@@ -1,0 +1,26 @@
+<template name="uploader">
+  <div class="upload-area">
+    <form id="upload">
+      <p class="alert alert-success text-center">
+        <span class="hidden">Click or Drag a File here to Upload</span>
+      </p>
+      <div>
+          <label for="file-upload" >
+            <span  class="btn btn-default btn-sm pull-right margin-right-minus-30">
+              {{ i18n 'upload.file'}}
+            </span>
+          </label>
+        </div>
+      <input id="file-upload" type="file" style="display: none;"/>
+      {{#if showProgress curUploader}}
+        {{#with curUploader}}
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{progressFunc}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progressFunc}}%;">
+            <span class="sr-only">{{progressFunc}}% Complete</span>
+          </div>
+        </div>
+        {{/with}}
+      {{/if}}
+    </form>
+  </div>
+</template>

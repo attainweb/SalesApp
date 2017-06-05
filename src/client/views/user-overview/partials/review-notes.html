@@ -1,0 +1,20 @@
+<template name='reviewNotes'>
+  {{#if showNotesSection }}
+    <div class="user-{{noteType}} text-center">
+      <table class="user-info table table-bordered table-striped table-condensed">
+        <tbody>
+          <th class="text-center">{{ translateText 'title' }}</th>
+          {{#each reviewNote in reviewNotes }}
+          <tr>
+            <td>{{formatReviewNote reviewNote}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{#if showInputArea }}
+        <textarea class="comment form-control" rows="2" id="{{noteType}}-comment" maxlength="256" placeholder="{{ translateText 'commentBox'}}"></textarea>
+        <button id="add-{{noteType}}" class="review-notes-btn btn btn-primary pull-left" disabled={{state.disableButton}}>{{ translateText 'addNoteButton' }}</button>
+      {{/if}}
+    </div>
+  {{/if}}
+</template>

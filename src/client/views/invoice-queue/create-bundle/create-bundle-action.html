@@ -1,0 +1,12 @@
+<template name="createBundleAction">
+  <div class="create_bundle_action">
+    <div class="row text-center">
+      {{#if orders}}
+        <h4 class="text-center">{{ i18n 'exportPaidInvoices.title' orders amount }}</h4>
+        <button class="btn btn-primary create-payments-bundle-button">{{ i18n 'exportPaidInvoices.buttons.save' }} </button>
+      {{else}}
+        <h4 class="text-center">{{ i18n 'exportPaidInvoices.noPaidOrders' }}</h4>
+      {{/if}} 
+    </div> 
+  </div>
+</template>

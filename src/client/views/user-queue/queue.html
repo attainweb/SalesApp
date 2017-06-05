@@ -1,0 +1,77 @@
+<template name="queue">
+  <div id="queue">
+    <div class="fullscreen panel panel-default">
+      <div class="panel-heading">
+        <h1 class="text-center">{{ title }}</h1>
+
+        {{#if showMainFilter}}
+          <div class="row">
+            <div class="col-md-3 queue-filter-col">
+              {{> multiple_choice_selection selection=fineTuneFilters
+                                            template="fineTuneFilters"
+                                            onSelectionChanged=onFineTuneFiltersChanged}}
+            </div>
+  
+            <div class="col-md-6 queue-filter-col">
+              {{> queueTabs selected=mainFilter
+                              onTabChanged=onMainFilterChanged
+                              counts=mainFilterCounts }}
+              {{#if isComplianceOfficer }}
+                  <div class="col-md-12">
+                    {{> multiple_choice_selection selection=residenceCountryFilters
+                    template="residenceCountryFilters"
+                    onSelectionChanged=onResidenceCountryFiltersChanged}}
+                  </div>
+              {{/ if }}
+            </div>
+            
+            <div class="col-md-3 queue-filter-col">
+              {{> dateRangeSelection locale=getDateTimeLanguage
+                           format="L"
+                           onSelectionChanged=onRangeChanged
+                           selectedRange=datesRange }}
+              <div class="row">
+                {{> searchBar categories=state.searchBarCategories
+                           selectedCategory=searchCategory
+                           value=searchValue
+                           onSearchSubmitted=onSearchSubmitted }}
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <span>
+              <a href="{{pathFor 'complianceRecords'}}">{{ i18n 'approval.recordsLink' }}</a>
+              {{# if requesting }}
+                <i class='fa fa-spinner fa-spin '></i> {{ i18n 'approval.loading' }}
+              {{/ if }}
+            </span>
+          </div>
+        {{/ if }}
+      </div>
+
+      <div class="panel-body">
+        <p class="results-total">{{i18n 'queueDoc.result.totalItems'}}: {{totalSearchResults}}</p>
+        <p class="text-center lead">{{ i18n flash }}</p>
+        <table class="table">
+          <tr>
+            <th>{{ i18n 'userSummary.progress'}}</th>
+            <th>{{ i18n 'userSummary.surname' }}</th>
+            <th>{{ i18n 'userSummary.name' }}</th>
+            <th>{{ i18n 'userSummary.email' }}</th>
+            <th>{{ i18n 'userSummary.residenceCountry' }}</th>
+            <th>{{ i18n 'userSummary.accountType' }}</th>
+            <th>{{ i18n 'userSummary.levels' }}</th>
+            <th>{{ i18n 'userSummary.indicators' }}</th>
+            <th>{{ i18n 'userSummary.currentReviewer' }}</th>
+          </tr>
+          {{#each user in compliance_queue}}
+            {{> userSummary user=user options=userSummaryOptions isEnableToReview=isEnableToReview }}
+          {{/each}}
+        </table>
+        {{> loadingIndicator scrollTargetSelector=state.scrollTarget
+                              showIndicator=hasMoreToLoad}}
+      </div>
+    </div>
+  </div>
+</template>

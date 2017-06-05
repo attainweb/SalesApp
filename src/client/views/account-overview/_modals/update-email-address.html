@@ -1,0 +1,36 @@
+<template name="updateEmailAddress">
+	<div id="update-email-address"  class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+          <h3>{{ i18n 'modals.accountInfo.changeEmail.title' }}</h3>
+				</div>
+				<div class="modal-body">
+					<div class="row alert alert-warning">
+						<div class="col-md-1">
+					  	<i class="fa fa-exclamation-triangle"></i>
+            </div>
+						<label class="col-md-11">{{ i18n 'modals.accountInfo.changeEmail.warning'}}</label>
+					</div>
+					<form id="email-form">
+						<div class="row">
+							<div class="notice">{{notice}}</div>
+							<div class="form-group">
+								<label class="control-label" for="email-input">{{ i18n 'modals.accountInfo.changeEmail.inputLabel' }}</label>
+								<input id="email-input" type="email" class="form-control" required />
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						{{ i18n 'modals.buttons.cancel' }}
+					</button>
+					<button type="button" class="confirm-change btn btn-primary">
+						{{ i18n 'modals.buttons.confirm' }}
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

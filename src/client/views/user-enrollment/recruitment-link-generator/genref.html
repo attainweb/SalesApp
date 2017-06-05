@@ -1,0 +1,85 @@
+<template name="genref">
+    <div id="reflink" class="{{role}}">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="text-center">{{ i18n 'genref.title' roleName }}</h1>
+                </div>
+
+                <div class="panel-body">
+                    {{#if showTiersAndTimetype}}
+                    <div class="row text-center">
+                        <div class="row col-sm-6">
+                            {{> tier_selector}}
+                        </div>
+                        <div class="row col-sm-6">
+                            {{> timetype_selector}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if showTiers}}
+                    <div class="row text-center">
+                        {{> tier_selector}}
+                    </div>
+                    {{/if}}
+
+                    {{#if showTimetype}}
+                    <div class="row text-center">
+                        {{> timetype_selector}}
+                    </div>
+                    {{/if}}
+
+                    <!-- TODO: set expiration field -->
+
+                    <div class="row text-center form-group">
+                        <label for="namelink">{{ i18n 'genref.linkname' }}</label><br>
+                        <input type="text" id="namelink" class="form-control" maxlength="50">
+                    </div>
+
+                    <div class="row text-center form-group">
+                        <label for="link-notes">{{ i18n 'genref.linknote' }}</label><br>
+                        <textarea id="link-notes" rows="4" maxlength="250" class="form-control" ></textarea>
+                    </div>
+
+                    {{#if isGenerated}}
+                    <div class="row text-center">
+                        <h1 class="text-center">{{ i18n 'genref.link' roleName}}</h1>
+                        <p id="newly-generated-link" class="word-break">{{urlFor route="enrollWizard" data=enrollData}}</p>
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="row text-center">
+                    {{#button id="genlink-btn" class="btn btn-primary" waitOn=btnWaiting}}
+                        {{ i18n 'genref.button' }}
+                    {{/button}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="tier_selector">
+    <div class="tiers">
+    {{#if currentUser.distlevelIsLTE 0}}
+            <input type="radio" name="tier" value="1">
+            <label for="tier 1">{{ i18n 'genref.tier1' }}</label><br>
+    {{/if}}
+    {{#if currentUser.distlevelIsLTE 1}}
+            <input type="radio" name="tier" value="2">
+            <label for="tier 2">{{ i18n 'genref.tier2' }}</label><br>
+    {{/if}}
+    {{#if currentUser.distlevelIsLTE 2}}
+            <input type="radio" name="tier" value="3">
+            <label for="tier 3">{{ i18n 'genref.tier3' }}</label>
+    {{/if}}
+    </div>
+</template>
+
+<template name="timetype_selector">
+        <input type="radio" name="timetype" checked="checked" value="onetime">
+        <label for="onetime">{{ i18n 'genref.onetime' }}</label><br>
+        <input type="radio" name="timetype" value="unlimited">
+        <label for="unlimited">{{ i18n 'genref.unlimited' }}</label>
+</template>

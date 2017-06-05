@@ -1,0 +1,3 @@
+bootbox.setDefaults({
+  closeButton: false
+});

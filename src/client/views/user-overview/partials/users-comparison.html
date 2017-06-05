@@ -1,0 +1,24 @@
+<template name="usersComparison">
+<div class="user panel-default data-panel fullscreen">
+    <div class="panel-collapse collapse {{#if isOpen}}in{{/if}}" id="user-{{user._id}}">
+      <div class="row">
+        <div class="col-sm-6">
+          <h3> {{i18n 'reviewUser.usersComparison.currentlyReviewing'}} </h3>
+          <div class="user-review">
+            {{#with currentUser.currentlyReviewing}}
+              {{> user_info }}
+            {{/with}}
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <h3> {{i18n 'reviewUser.usersComparison.userWithSameBirthday'}} </h3>
+          <div class="user-compared">
+            {{#with user}}
+              {{> usersComparisonInfo }}
+            {{/with}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,14 @@
+
+<template name="sidebar_account_link">
+    <li class="{{isActiveRoute class='active' regex='account$|landing'}}">
+        <a href="/account">{{ i18n 'sidebar.account'}}</a>
+    </li>
+    {{#if isInRole 'buyer'}}
+      <li class="{{isActiveRoute class='active' regex='reorder'}}">
+          <a href=/account/reorder>{{ i18n 'sidebar.reorder'}}</a>
+      </li>
+      <li class="{{isActiveRoute class='active' regex='purchases'}}">
+          <a href="/purchases">{{ i18n 'sidebar.purchases'}}</a>
+      </li>
+    {{/if}}
+</template>

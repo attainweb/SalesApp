@@ -1,0 +1,67 @@
+<template name="refCard">
+    <div class="row">
+
+        <div class="col-sm-1">
+            <span class="expand">
+                {{#if state.isExpanded}}
+                    <i class="fa fa-2x fa-caret-square-o-down"></i>
+                {{else}}
+                    <i class="fa fa-2x fa-caret-square-o-right"></i>
+                {{/if}}
+            </span>
+        </div>
+
+        <div class="col-sm-11">
+            <table class="table table-responsive table-bordered">
+                <tr>
+                    <th>{{i18n 'refInfo.link'}}:</th>
+                    <td class="word-break ref-link">{{url}}/{{refcode}}</td>
+                </tr>
+
+                <tr>
+                    <th>{{i18n 'refInfo.name'}}:</th>
+                    <td class="ref-name">{{name}}</td>
+                </tr>
+
+                {{#if distlevel}}
+                <tr>
+                    <th>{{i18n 'refInfo.level'}}:</th>
+                    <td class="ref-name">{{distlevel}}</td>
+                </tr>
+                {{/if}}
+
+                <tr>
+                    <th>{{i18n 'refInfo.reftype.title'}}:</th>
+                    <td  class="ref-type">{{showRefType}}</td>
+                </tr>
+
+                {{#if notPartner}}
+                <tr>
+                    <th>{{i18n 'refInfo.status.title'}}:</th>
+                    <td>{{status}}</td>
+                </tr>
+                {{/if}}
+
+                {{#if state.isExpanded}}
+                <tr>
+                    <th>{{i18n 'refInfo.createdAt'}}:</th>
+                    <td  class="ref-createdAt">{{formatDate createdAt}}</td>
+                </tr>
+
+                <tr>
+                    <th>{{i18n 'refInfo.notes'}}:</th>
+                    <td>{{notes}}</td>
+                </tr>
+                {{/if}}
+            </table>
+            {{#if isRetireable}}
+                <button class="retire">
+                    <i class="fa fa-trash-o"></i>
+                    {{i18n 'refInfo.retire'}}
+                </button>
+                <hr>
+            {{/if}}
+        </div>
+
+    </div>
+</template>

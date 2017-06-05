@@ -1,0 +1,31 @@
+<template name="invoice_ticket_action_update_comment">
+  <div class="invoice_ticket_action_update_comment">
+    <div class="row">
+      <div class="col-sm-8">
+        {{# if state.edit }}
+          <div class="comment-box">  
+            <textarea class="form-control comment" rows="5" maxlength="20000">{{ showTicketComment }}</textarea>
+          </div>
+          <button class="btn btn-default cancel_comment">
+            {{ i18n 'invoiceCard.buttons.cancel' }}
+          </button>
+          <button class="btn btn-primary save_comment">
+            {{ i18n 'invoiceCard.buttons.save' }}
+          </button>
+        {{ else }}
+          <div class="comment-box" >
+            {{# if hasNoCommnet }}
+              <h4> {{ i18n 'invoiceCard.commentBox.noComments' }} </h4>
+            {{ else }}
+              <h4> {{ i18n 'invoiceCard.commentBox.comments' }} </h4>
+              <p> {{ showTicketComment }} </p>
+          {{/ if }} 
+          </div>
+          <button class="btn btn-primary edit_comment">
+            {{ i18n 'invoiceCard.buttons.edit' }}
+          </button>
+        {{/ if }}
+      </div>
+    </div>
+  </div>
+</template>

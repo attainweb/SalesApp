@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    ["transform-runtime"],
+    ["babel-root-import", {
+      "rootPathSuffix": "src",
+      "rootPathPrefix": "/"
+    }]
+  ],
+  "presets": ["es2015", "stage-2"]
+}

@@ -1,0 +1,33 @@
+#sidebar-wrapper {
+  background: @navbar-bg-color url('/images/dummy-logo.png') no-repeat;
+  background-position: 55px ~"calc(100% - 20px)";
+  width: 260px;
+
+  .personalInformation {
+    padding-left: 20px;
+  }
+
+  .user-name {
+    color: white;
+    margin-bottom: 0.1em;
+    font-weight: 300;
+    word-wrap: break-word;
+  }
+
+  .user-email {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 13px;
+    font-weight: 300;
+  }
+
+  #logout-button {
+    color: @navbar-link-color;
+    padding-top: 20px;
+    display: inline-block;
+    border-top: 2px solid #2e5885;
+    margin-top: 20px;
+    margin-left: 20px;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+}

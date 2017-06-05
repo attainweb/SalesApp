@@ -1,0 +1,3 @@
+echo "Watch package tests at http://localhost:3400"
+cd src/packages
+meteor test-packages sales:invoice-manager -p=3400

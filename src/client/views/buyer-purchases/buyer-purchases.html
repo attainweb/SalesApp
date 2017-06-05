@@ -1,0 +1,29 @@
+<template name="buyerPurchases">
+  <div id="buyer-purchases" >
+    <div class="fullscreen panel panel-default">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-lg-9">
+            <h1 class="purchases-title">{{ i18n 'purchases.title'}}</h1>
+          </div>
+          {{# if isRegenerationAvailable }}
+            <div class="col-lg-3">
+              <button type="button" class="btn btn-danger pull-right request-regenerate-all-product-passcodes-button" disabled="{{state.isDisabled}}">
+                {{ i18n 'reGenerateProductPasscodes.buttonMessage' }}
+              </button>
+            </div>
+          {{/ if }}
+        </div>
+        {{> updateWalletAddress}}
+      </div>
+    </div>
+    <div class="invoice-items">
+      <div class="row">
+        {{# each ticket in tickets }}
+          {{> buyerPurchasesRow
+              rowItem=ticket }}
+        {{/ each }}
+      </div>
+    </div>
+  </div>
+</template>

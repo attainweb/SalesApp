@@ -1,0 +1,17 @@
+<Template name="ticket_card">
+    <div class="panel-heading {{hasContentClass}}" id={{getCardId}}>
+        <div>
+            {{> UI.dynamic template=cardTypeTemplate data=ticket }}
+        </div>
+        {{#if hasContent }}
+            <div class="ticket-card-panel-toggle" aria-expanded="{{state.visible}}" > </div>
+        {{/if}}
+    </div>
+    {{#if hasContent }}
+      <div class="panel-collapse {{# if state.visible }} in {{/if}}">
+        <div class="row">
+          {{> Template.contentBlock }}
+        </div>
+      </div>
+    {{/if}}
+</Template>

@@ -1,0 +1,39 @@
+{{lastName}} {{firstName}}　様
+
+
+このメールが受領証となります。
+ご確認の上大事に保管下さい。
+
+
+*******************
+
+{{productName}}公開後、実際に{{productName}}をウォレットに入金するためには受領証が必要となります。
+紛失された場合、{{productName}}を入手できなくなりますのでお気をつけ下さい。
+
+*******************
+
+
+===================
+
+受領証
+
+-------------------
+
+受領証ID(請求書IDと同様): {{invoiceNumber}}
+
+交換完了日時: {{date}}
+
+Bitcoin送金額: {{btcReceived}}
+
+適用されたUSD/BTCレート: {{btcUsd}}
+
+{{productName}}交換額: {{productPurchased}}
+
+ドル交換希望金額: {{usdRequested}}
+
+{{productName}}還元用コード: {{productPasscode}}
+
+===================
+
+
+{{> footer_LANG_ . }}

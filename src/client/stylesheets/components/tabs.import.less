@@ -1,0 +1,31 @@
+.tabs {
+  > li {
+    float: left;
+
+    a {
+      padding: 10px 0;
+      margin-right: 30px;
+      text-transform: uppercase;
+      font-size: 14px;
+      color: #91acbd;
+      &:hover {
+        background: none;
+      }
+    }
+
+    // Align first tab item to left side
+    &:first-child a {
+      padding-left: 0;
+    }
+
+    // Mark the active item
+    &.active {
+      a, a:hover, a:focus {
+        cursor: default;
+        color: @link-color;
+        border-bottom: 3px solid @link-color;
+        background: none;
+      }
+    }
+  }
+}

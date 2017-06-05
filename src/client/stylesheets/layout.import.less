@@ -1,0 +1,449 @@
+@mobile-breakpoint: 768px;
+
+#wrapper {
+  &.without-user-layout {
+    padding-top: 20px;
+  }
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+#wrapper {
+    &.navbar-on-full-width{
+        height: ~"calc(100% - 45px)";
+    }
+}
+#wrapper {
+  overflow: auto;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  @media (max-width: @mobile-breakpoint) {
+    height: ~"calc(100% - 45px)";
+  }
+}
+
+// All panels are full-width on small sizes and have a max-width by default
+.panel {
+  width: ~"calc(100% - 40px)";
+  max-width: 620px;
+  margin: 0 auto;
+
+  @media (max-width: @mobile-breakpoint) {
+    border-radius: 0;
+  }
+}
+
+.panel-center {
+  width: ~"calc(100% - 40px)";
+  max-width: 620px;
+  margin: 0 auto;  
+}
+
+// These panels stay full-width
+.panel.fullscreen, .compliance-records.panel {
+  max-width: none;
+}
+
+.narrowed-4{
+    width: 40%;
+    margin: auto;
+}
+
+.narrowed-5{
+    width: 50%;
+    margin: auto;
+}
+
+.narrowed-6{
+    width: 60%;
+    margin: auto;
+}
+
+.narrowed-7{
+    width: 70%;
+    margin: auto;
+}
+
+.narrowed-8{
+    width: 80%;
+    margin: auto;
+}
+
+.narrowed-9{
+    width: 90%;
+    margin: auto;
+}
+
+.normal{
+    width: 100%;
+    margin: auto;
+}
+
+.row{
+    padding: 10px 0;
+    margin: 0;
+    .table{
+        th, td{
+            vertical-align: top;
+        }
+    }
+    .fa-2x{
+        font-size: 2em;
+    }
+}
+
+//register form
+#register-form{
+    .narrowed-6;
+}
+
+#viewlinks .panel{
+    .normal;
+}
+
+//add admin form
+#add-compliance-officer-form .panel{
+    .form-group{
+        .narrowed-4;
+    }
+}
+
+#add-customer-service-officer-form .panel{
+    .form-group{
+        .narrowed-4;
+    }
+}
+
+#viewlinks-mobile{
+    display: none;
+}
+
+.iframe-container {
+    padding-bottom: 60%;
+    padding-top: 30px; height: 0; overflow: hidden;
+}
+
+.iframe-container iframe,
+.iframe-container object,
+.iframe-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.thank-you .panel{
+    border-color: #BE7504;
+}
+
+#review-user .panel{
+    .narrowed-7;
+}
+
+.queue-doc:last-child{
+    img{
+        margin-left: 10px;
+    }
+}
+
+.word-break{
+    word-break: break-all;
+}
+
+#viewlinks, #partner_viewlinks, #review-user{
+    table {
+        border-collapse: collapse;
+        border-spacing: 4px 2px;
+    }
+}
+
+//media-quiries
+@media(max-width: 1400px){
+    #review-user .panel{
+        .narrowed-8;
+    }
+}
+
+@media (max-width: 1200px){
+    .queue-doc:last-child{
+        img{
+            margin-left: 5px;
+        }
+    }
+}
+
+@media (max-width:1100px){
+
+}
+
+@media (max-width:1000px){
+    #viewlinks .panel {
+        .col-sm-1, .col-sm-11{
+            display: inline-block;
+            padding-left: 10px;
+            padding-right: 10px
+        }
+        .fa-2x{
+            font-size: 1.5em;
+        }
+    }
+}
+
+@media (max-width:990px){
+    .container-fluid{
+        padding: 0;
+    }
+
+    #register-form{
+        .narrowed-7;
+    }
+    #add-compliance-officer-form .panel{
+        .form-group{
+            .narrowed-5;
+        }
+    }
+    #add-customer-service-officer-form .panel{
+        .form-group{
+            .narrowed-5;
+        }
+    }
+    #viewlinks{
+         .col-sm-6{
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+        .panel {
+            .col-sm-1, .col-sm-11{
+                padding-left: 5px;
+                padding-right: 5px
+            }
+        }
+    }
+}
+
+@media (max-width:900px){
+    #viewlinks{
+        display: none;
+    }
+    #viewlinks-mobile{
+        display: block;
+        .panel{
+            margin-bottom: 15px;
+        }
+        a:link, a:hover{
+            color: black;
+            text-decoration: none;
+        }
+    }
+    .queue-doc:last-child{
+        img{
+            margin-left: 0;
+            margin-top: 5px;
+        }
+    }
+}
+
+@media (max-width:800px){
+    #add-compliance-officer-form .panel{
+        .form-group{
+            .narrowed-6;
+        }
+    }
+    #add-customer-service-officer-form .panel{
+        .form-group{
+            .narrowed-6;
+        }
+    }
+    #viewlinks .panel {
+        .fa-2x{
+            font-size: 1em;
+        }
+    }
+}
+
+@media(max-width: 767px){
+    #register-form .form-group{
+        .narrowed-7;
+    }
+    .table-responsive{
+        border: none;
+    }
+    #viewlinks-mobile{
+        .col-sm-11 td{
+            word-break: break-all;
+        }
+    }
+}
+
+@media(max-width: 700px){
+    .panel{
+        .col-sm-1, .col-sm-11{
+            display: inline-block;
+        }
+        .col-sm-1{
+            width: 8%;
+            padding: 0;
+            float: left;
+        }
+       .col-sm-11{
+            width: 90%;
+            padding: 0;
+            float: right;
+        }
+    }
+    #viewlinks .panel {
+        .col-sm-6{
+            margin-bottom: 10px;
+        }
+        .fa-2x{
+            font-size: 2em;
+        }
+    }
+    .queue-doc:last-child{
+        img{
+            margin-left: 0;
+            margin-top: 0;
+        }
+    }
+    .queue-doc:first-child{
+        img{
+            margin-right: 10px;
+        }
+    }
+}
+
+@media (max-width:600px){
+    #register-form .form-group{
+        .narrowed-8;
+    }
+}
+
+@media (max-width:500px){
+    #register-form .form-group{
+        .narrowed-9;
+    }
+
+    #partner_viewlinks{
+        .panel{
+            .normal;
+        }
+    }
+
+    #add-compliance-officer-form .panel {
+        .form-group{
+            .narrowed-7;
+        }
+    }
+
+    #add-customer-service-officer-form .panel {
+        .form-group{
+            .narrowed-7;
+        }
+    }
+}
+
+@media (max-width:400px){
+
+    #register-form {
+        .narrowed-8;
+        .form-group{
+            .normal;
+        }
+    }
+
+    #add-compliance-officer-form .panel {
+        .form-group{
+            .narrowed-8;
+        }
+    }
+
+    #add-customer-service-officer-form .panel {
+        .form-group{
+            .narrowed-8;
+        }
+    }
+
+    .row .fa-2x{
+        font-size: 1.5em;
+    }
+}
+
+@media (min-height: 600px){
+    .thank-you .panel{
+        margin-top: 150px;
+    }
+}
+
+@media (max-height: 590px){
+    .thank-you .panel{
+        margin-top: 50px;
+    }
+}
+
+#sidebar-wrapper, #page-content-wrapper{
+    padding-top: 15px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    min-width: 260px;
+    width: 16.7%;
+    position: absolute;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#page-content-wrapper{
+    // properties for infinite scroll
+    overflow-y: auto;
+    height: 100%;
+    position: inherit;
+    margin: 0 0 0 260px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
+    &.full-width {
+        margin: 0;
+    }
+}
+
+// delete before pull request, see also -> HIM_queue.html , HIM_queue.js
+.infinite-scroll {
+    overflow-y: auto;
+    height: 100%;
+}
+
+@media(max-width: 768px){
+    #sidebar-wrapper{
+        display: none;
+    }
+    #page-content-wrapper{
+        width: 100%;
+        margin: 0;
+    }
+}
+
+#page-content-wrapper{
+    &.full-width {
+        width: 100%;
+    }
+    .container-fluid {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+}

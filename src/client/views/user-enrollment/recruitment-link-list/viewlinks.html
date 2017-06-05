@@ -1,0 +1,59 @@
+<template name="viewlinks">
+    <div id="viewlinks-mobile" class="panel-group" role="tablist" aria-multiselectable="true">
+        {{#if currentUser.distlevelIsLTE 2}}
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h1 class="text-center">
+                    {{ i18n 'viewlinks.distributor' }}
+                </h1>
+            </div>
+
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    {{> viewlinksList reftype="distributor"}}
+                </div>
+            </div>
+        </div>
+        {{/if}}
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h1 class="text-center">
+                    {{ i18n 'viewlinks.buyer' }}
+                </h1>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                    {{> viewlinksList reftype="buyer"}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="viewlinks" class="panel-group {{panelClass}}">
+        {{#if currentUser.distlevelIsLTE 2}}
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="text-center">{{ i18n 'viewlinks.distributor' }}</h1>
+                </div>
+                <div class="panel-body">
+                    {{> viewlinksList reftype="distributor"}}
+                </div>
+
+            </div>
+        </div>
+        {{/if}}
+
+        <div class="{{colClass}}">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="text-center">{{ i18n 'viewlinks.buyer' }}</h1>
+                </div>
+                <div class="panel-body">
+                    {{> viewlinksList reftype="buyer"}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

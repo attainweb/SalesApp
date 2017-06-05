@@ -1,0 +1,31 @@
+<template name="refundInvalidFunds">
+	<div id="refund-invalid-funds-{{ticketId}}"  class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<h3>{{ i18n 'modals.refundInvalidFundsModal' }}</h3>
+					<form id="refund-form">
+						<div class="row">
+							<div class="text-center">
+								<div class="form-group">
+									<label for="refundTransactionId">{{ i18n 'refundInvalidFunds.refundTransactionId' }}</label>
+									<input id="refundTransactionId" class="form-control">
+                  <label for="refundReason">{{ i18n 'refundInvalidFunds.refundReason' }}</label>
+									<input id="refundReason" class="form-control">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						{{ i18n 'modals.buttons.cancel' }}
+					</button>
+					<button type="button" class="confirm-refund btn btn-primary">
+						{{ i18n 'modals.buttons.update' }}
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

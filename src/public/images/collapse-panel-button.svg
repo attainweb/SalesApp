@@ -1,0 +1,19 @@
+<svg id="collapse-panel-button" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #02a5e8;
+        stroke-width: 1px;
+      }
+
+      .cls-2 {
+        fill: #02a5e8;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <circle id="Ellipse_1_copy" data-name="Ellipse 1 copy" class="cls-1" cx="13" cy="13" r="12.5"/>
+  <path class="cls-2" d="M1052.35,210.354l-0.7-.708,6-6,0.7,0.708Z" transform="translate(-1044.5 -194.5)"/>
+  <path class="cls-2" d="M1063.35,209.646l-0.7.708-6-6,0.7-.708Z" transform="translate(-1044.5 -194.5)"/>
+</svg>

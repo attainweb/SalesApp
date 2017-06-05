@@ -1,0 +1,24 @@
+<svg id="add-button" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="26" viewBox="0 0 26 26">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #91acbd;
+        fill-rule: evenodd;
+        filter: url(#filter);
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #02a5e8;
+        stroke-width: 1px;
+      }
+    </style>
+    <filter id="filter" x="335.531" y="88.969" width="9.844" height="9.844" filterUnits="userSpaceOnUse">
+      <feFlood result="flood" flood-color="#54bbe7"/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <path id="_" data-name="+" class="cls-1" d="M339.859,93.305H335.53v1.181h4.329v4.329h1.181V94.486h4.329V93.305H341.04V88.977h-1.181v4.329Z" transform="translate(-327.5 -81.5)"/>
+  <circle class="cls-2" cx="13" cy="13" r="12.5"/>
+</svg>

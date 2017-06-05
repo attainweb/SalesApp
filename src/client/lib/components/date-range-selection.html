@@ -1,0 +1,33 @@
+<template name="dateRangeSelection">
+  <div class="date-range-selection">
+    <div class="row">
+      <div class="col-md-6 date-picker-col">
+        {{> datetime_picker
+          dateValue=props.selectedRange.startDate
+          locale=props.locale
+          format=props.format
+          onDateChanged=startDateChangedHandler
+          showTodayButton=true
+          allowInputToggle=true
+          useCurrent=false
+          maxDate=state.maxStartDate
+          placeholder=from
+        }}
+      </div>
+      <div class="col-md-6 date-picker-col">
+        {{> datetime_picker
+          dateValue=props.selectedRange.endDate
+          locale=props.locale
+          format=props.format
+          onDateChanged=endDateChangedHandler
+          showTodayButton=true
+          allowInputToggle=true
+          useCurrent=false
+          minDate=state.minEndDate
+          maxDate=today
+          placeholder=to
+        }}
+      </div>
+    </div>
+  </div>
+</template>

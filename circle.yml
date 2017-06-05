@@ -1,0 +1,26 @@
+machine:
+  node:
+    version: 4.5.0
+dependencies:
+  cache_directories:
+    - "~/.npm"
+    - "~/.meteor"
+    - "src/node_modules"
+    - "src/.meteor/local/build"
+    - "src/.meteor/local/bundler-cache"
+    - "src/.meteor/local/isopacks"
+    - "src/.meteor/local/plugin-cache"
+    - "/home/ubuntu/nvm/versions/node/v5.2.0/bin"
+    - "/home/ubuntu/nvm/versions/node/v5.2.0/lib/node_modules"
+  override:
+    - ./bin/_helpers/upgrade-chrome-version.sh
+    - ./bin/_helpers/cache-meteor.sh
+    - ./bin/_helpers/cache-npm-dependencies.sh
+    - ./bin/_helpers/cache-build-and-dependencies.sh
+test:
+  pre:
+    - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
+  override:
+    - ./bin/test/unit-run
+    - ./bin/test/integration-run
+    - ./bin/test/end-to-end-run

@@ -1,0 +1,44 @@
+<template name="commissionItem">
+    <div class="row">
+        <div class="commission panel panel-default data-panel fullscreen">
+
+            <!-- BUYER INFORMATION IN PANEL HEADING -->
+            <div class="panel-heading">
+
+                <table class="data-table">
+
+                    <thead>
+                        <tr>
+                            <td>{{i18n "commissions.amount"}}</td>
+                            <td>{{i18n "commissions.txId"}}</td>
+                            <td>{{i18n "commissions.date"}}</td>
+                            <td>{{i18n "commissions.type"}}</td>
+                            <td>{{i18n "commissions.invoice"}}</td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td class="amount">{{formatCurrency 'BTC' (satoshisToBtc payoutAmount)}}</td>
+                            <td class="transaction">
+                                {{#if payoutTransactionId}}
+                                <a href="{{btcServiceUrl}}{{payoutTransactionId}}" target="_blank">
+                                    {{i18n "commissions.viewTransaction"}}
+                                </a>
+                                {{else}}
+                                    {{i18n "commissions.pending"}}
+                                {{/if}}
+                            </td>
+                            <td class="date">{{formatDate paidAt}}</td>
+                            <td class="type">{{originator}}</td>
+                            <td class="invoice">{{invoiceNumber}}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</template>

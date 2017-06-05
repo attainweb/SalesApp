@@ -1,0 +1,149 @@
+#review-user {
+  margin-top: -5px;
+
+  .js-af-select-file {
+    width: 80px;
+    margin-right: 10px;
+  }
+
+  .documents .title {
+    margin-bottom: 10px;
+  }
+
+  .panel-body .row {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .no-padding {
+    padding: 0px;
+  }
+
+  .col-document {
+    .doc-image-large {
+      height: 460px;
+    }
+
+    label {
+      font-size: large;
+    }
+  }
+
+  .row-current-document {
+    height: 360px;
+  }
+
+  .centered {
+    margin: 0 auto;
+  }
+
+  .action-buttons {
+    margin-bottom: 5px;
+  }
+
+  .comment {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .doc-image-large {
+    max-height: 88vh;
+
+    .doc-outer {
+      padding-left: 10px;
+      padding-right: 10px;
+
+      .doc-inner {
+        height: 90vh;
+        width: 90vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        img {
+          vertical-align: middle;
+          max-width: 90% !important;
+          max-height: 75vh !important;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+  .docs {
+    &-outer {
+      width: 100px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      max-height: 100%;
+    }
+
+    &-inner {
+      width: 100%;
+    }
+  }
+
+  .doc-image {
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    .image-container {
+      position: relative;
+      border: 2px solid;
+      
+      &.approved {
+        border-color: #43ac6a;
+      }
+      
+      &.not-approved {
+        border-color: #F04124;
+      }
+
+      .doc-img-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background: rgba(0,0,0,.5);
+
+        .text {
+          margin-top: 26px;
+          color: white;
+          text-align: center;
+          font-size: 10px;
+        }
+
+        &.active {
+          .text { display: block; }
+          &:hover .text { display: block; }
+        }
+      }
+    }
+
+    &:hover .doc-img-overlay,
+    .doc-img-overlay.active {
+      z-index: 1;
+
+      &:not(.disabled) { cursor: pointer; }
+    }
+
+    .doc-img-overlay.active {
+      .hover-show { display: none; }
+
+      &:hover {
+        .hover-hidden { display: none; }
+        .hover-show { display : block; }
+      }
+    }
+
+    .doc-img-overlay, .doc-img, .small-doc {
+      height: 80px;
+      width: 80px;
+    }
+  }
+
+  .row-no-padding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}

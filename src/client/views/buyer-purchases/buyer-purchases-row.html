@@ -1,0 +1,17 @@
+<template name="buyerPurchasesRow">
+  <div class="data-panel">
+    {{# ticket_card 
+      cardTypeTemplate='buyerInvoiceTicket'
+      ticket=ticketItem
+      cardId=ticketItem.ticket.invoiceNumber
+      hasContent=isRegenerationAvailable }}
+	    <div class="row">
+	      <div class="col-xs-3">
+	        <button class="btn btn-danger regenerate-product-code" disabled="{{state.isDisabled}}">
+	          {{ i18n 'invoiceCard.buttons.regenerateProductCode' }}
+	        </button>
+	      </div>
+	    </div>
+    {{/ ticket_card}}
+  </div>
+</template>

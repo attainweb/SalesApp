@@ -1,0 +1,66 @@
+<template name="investigatorDash">
+<div id="investigator-dash" >
+<div class="fullscreen panel panel-default">
+<div class="panel-heading">
+    <h1 class="text-center">{{ i18n 'investigator.title' }}</h1>
+<div class="row">
+      {{> investigatorTabs selected=mainFilter
+          onTabChanged=onMainFilterChanged
+          counts=mainFilterCounts }}
+</div>
+    {{#unless isUnderInvestigation}}
+    <div class="row">
+        {{#autoForm id="investigator-search" doc=searchQueryDoc validation="blur" schema=allowedSearchFields class="form-inline" template="bootstrap3-horizontal" }}
+            <div class="row">
+                {{#each field in searchfields}}
+                    <div class="col-lg-3">
+                        {{> afQuickField name=field.name label=field.label}}
+                    </div>
+                {{/each}}
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <button type="button" class="btn btn-primary search-users pull-right col-lg-2">{{i18n 'investigator.search'}}</button>
+                </div>
+            </div>
+        {{/autoForm}}
+    </div>
+    {{/unless}}
+    </div>
+
+        <div class="panel-body">
+            {{#unless queryReady}}
+                <p class="text-center lead">{{ i18n 'investigator.loading' }} {{> spinner}}</p>
+            {{else}}
+
+                <p class="results-total">{{i18n 'investigator.result.totalItems'}}: {{totalSearchResults}}</p>
+
+                {{#if foundUsers}}
+                    <table class="table">
+                        <tr>
+                            {{#unless isUnderInvestigation}}
+                                <th>{{ i18n 'userSummary.number'}}</th>
+                            {{/unless}}
+                            <th>{{ i18n 'userSummary.progress'}}</th>
+                            <th>{{ i18n 'userSummary.surname' }}</th>
+                            <th>{{ i18n 'userSummary.name' }}</th>
+                            <th>{{ i18n 'userSummary.email' }}</th>
+                            <th>{{ i18n 'userSummary.residenceCountry' }}</th>
+                            <th>{{ i18n 'userSummary.accountType' }}</th>
+                            <th>{{ i18n 'userSummary.indicators' }}</th>
+                        </tr>
+                        {{#each user in usersRecords}}
+                            {{> userSummary user=user isEnableToReview=isEnableToReview index=@index }}
+                        {{/each}}
+                    </table>
+                    {{> loadingIndicator 
+                          scrollTargetSelector=state.scrollTarget
+                          showIndicator=hasMoreToLoad}}
+                {{else}}
+                    <p class="text-center lead">{{ i18n 'investigator.noResults' }}</p>
+                {{/if}}
+            {{/unless}}
+        </div>
+    </div>
+    </div>
+</template>

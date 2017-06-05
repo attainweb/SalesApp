@@ -1,0 +1,10 @@
+<template name="editField">
+  {{#autoForm id=getFormId schema=getSchema successHandler=successHandler doc=doc removeEmptyStrings=false }}
+      {{> afQuickField type="hidden" name="userId" value=doc._id}}
+      {{> afQuickField name=getFieldName value=getFieldValue firstOption=false}}
+
+      {{> afQuickField type="password" name="password" placeholder=getPasswordPlaceholder firstOption=false}}
+      <button type="submit" disabled={{state.enableButton}} class="btn btn-primary {{updateButtonClass}}">{{getSaveButtonText}}</button>
+  {{/autoForm}}
+
+</template>

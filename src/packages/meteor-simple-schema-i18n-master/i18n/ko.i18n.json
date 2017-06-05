@@ -1,0 +1,68 @@
+{
+  "simpleschema": {
+    "messages": {
+      "required": "[label] 를 입력해 주십시오.",
+      "minString": "[label] 는[min]문자 이상을 입력해 주십시오.",
+      "maxString": "[label] 는[max] 문자 이상을 입력해 주십시오.",
+      "minNumber": "[label] 는[min]또는 그 이상의 값을 입력해 주십시오.",
+      "maxNumber": "[label] 는[max] 또는 그 이상의 값을 입력해 주십시오",
+      "minNumberExclusive": "[label] 는[min]이상의 값을 입력해 주십시오. ",
+      "maxNumberExclusive": "[label] 는[max]이하의 값을 입력해 주십시오.",
+      "minDate": "[label] 는[min]이후에 입력해 주십시오.",
+      "maxDate": "[label] 는[max]이전에 입력해 주십시오.",
+      "badDate": "[label] 는 날짜로 입력해 주십시오. ",
+      "minCount": "[label] 는[minCount]항목 이상을 지정해 주십시오.",
+      "maxCount": "[label] 는[maxCount]항목 이상을 지정해 주십시오.",
+      "noDecimal": "[label] 는 정수로 입력해 주십시오.",
+      "notAllowed": "[value] 는 유효하지 않습니다.",
+      "expectedString": "[label] 는 문자열로 입력해 주십시오.",
+      "expectedNumber": "[label] 는 수치로 입력해 주십시오.",
+      "expectedBoolean": "[label] 는 불 방식으로 입력해 주십시오.",
+      "expectedArray": "[label] 는 배열로 입력해 주십시오.",
+      "expectedObject": "[label] 는 대상을 입력해 주십시오.",
+      "expectedConstructor": "[label] 는[type]으로 입력해 주십시오.",
+      "keyNotInSchema": "[key] 는 무효한 스키마입니다.",
+      "regEx": {
+        "0": {
+          "msg": "[label] 는 정규 표현에 실패했습니다."
+        },
+        "1": {
+          "exp": "SimpleSchema.RegEx.Email",
+          "msg": "[label] 는 메일 어드레스로 입력해 주십시오."
+        },
+        "2": {
+          "exp": "SimpleSchema.RegEx.WeakEmail",
+          "msg": "[label] 는 메일 어드레스로 입력해 주십시오."
+        },
+        "3": {
+          "exp": "SimpleSchema.RegEx.Domain",
+          "msg": "[label] 는 메인으로 입력해 주십시오."
+        },
+        "4": {
+          "exp": "SimpleSchema.RegEx.WeakDomain",
+          "msg": "[label] 는 메인으로 입력해 주십시오."
+        },
+        "5": {
+          "exp": "SimpleSchema.RegEx.IP",
+          "msg": "[label] 는 IPv4 또는 IPv6 어드레스로 입력해 주십시오."
+        },
+        "6": {
+          "exp": "SimpleSchema.RegEx.IPv4",
+          "msg": "[label] 는 IPv4 또는 IPv6 어드레스로 입력해 주십시오."
+        },
+        "7": {
+          "exp": "SimpleSchema.RegEx.IPv6",
+          "msg": "[label] 는 IPv6 어드레스로 입력해 주십시오."
+        },
+        "8": {
+          "exp": "SimpleSchema.RegEx.Url",
+          "msg": "[label] 는 URL로 입력해 주십시오."
+        },
+        "9": {
+          "exp": "SimpleSchema.RegEx.Id",
+          "msg": "[label] 는 영문이나 숫자로 입력해 주십시오."
+        }
+      }
+    }
+  }
+}

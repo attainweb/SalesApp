@@ -1,0 +1,55 @@
+{{lastName}} {{firstName}}님
+
+주문해주셔서 감사합니다.
+
+{{usdRequested}}상당의 일본엔과 비트코인 교환 수수료의 7.75 %를 합한 금액을 입금해 주십시오.
+
+※교환 시 발생하는 송금 수수료 등은 고객이 부담하게 됩니다.
+
+
+특정 상거래 법에 기반을 둔 표시항목
+{{bankTerms}}
+
+
+**주의사항**
+
+계좌이체 시, 반드시 「송금 ID」를 예금주 앞에 기재해주십시오.
+
+예) 123456 홍길동
+
+
+**계좌이체 정보**
+
+〈송금 ID〉{{invoiceNumber}}
+
+〈주문 금액〉{{usdRequested}}
+〈교환 수수료〉{{processingFee}}
+〈입금 금액〉{{total}}
+〈청구서 발행일〉{{date}}
+
+송금처 금융 기관은 다음과 같습니다.
+
+〈계좌 이체 은행 정보 1〉
+
+【금융 기관명】{{bankAccount1.name}}
+【계좌종류】{{bankAccount1.accountType}}
+【지점번호】{{bankAccount1.branchName}}
+【계좌번호】{{bankAccount1.accountNumber}}
+【예금주】{{bankAccount1.transferDestination}}
+
+
+〈계좌 이체 은행 정보 2〉
+
+【금융 기관명】{{bankAccount2.name}}
+【계좌종류】{{bankAccount2.accountType}}
+【지점번호】{{bankAccount2.branchName}}
+【계좌번호】{{bankAccount2.accountNumber}}
+【예금주】{{bankAccount2.transferDestination}}
+
+
+〈참고〉
+
+환율 계산 사이트
+http://info.finance.yahoo.co.jp/fx/
+
+{{> footer_LANG_ . }}

@@ -1,0 +1,22 @@
+echo ">>> Running unit tests now <<<"
+./bin/test/unit-run
+if [ $? -eq 0 ];
+then
+  echo ">>> Unit tests have been successful! Running integration tests now <<<"
+  ./bin/test/integration-run
+  if [ $? -eq 0 ];
+  then
+    echo ">>> Integration tests have been successful! Running end to end tests now <<<"
+    ./bin/test/end-to-end-run
+    if [ $? -eq 0 ];
+    then
+      echo ">>> All tests ran successfully! <<<"
+    else
+      echo ">>> End to end tests have failed … please fix them. <<<"
+    fi
+  else
+    echo ">>> Integration tests have failed … please fix them. <<<"
+  fi
+else
+  echo ">>> Unit tests have failed … please fix them. <<<"
+fi

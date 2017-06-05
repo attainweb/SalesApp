@@ -1,0 +1,118 @@
+
+@add-button-size: 30px;
+
+#buyers-screen {
+
+  header {
+
+    .headline h1 {
+      display: inline-block;
+    }
+
+    .add-buyer {
+      overflow: hidden;
+      text-indent: -9999px;
+      position: relative;
+      top: -4px;
+      left: 4px;
+      width: @add-button-size;
+      height: @add-button-size;
+      border: none;
+      background: url("/images/add-button.svg") no-repeat;
+      background-size: 100%;
+      padding: 0;
+
+      &:active, &:focus {
+        outline: none;
+      }
+    }
+
+    .buyers-count {
+      text-transform: uppercase;
+      color: #3E5C77;
+      font-size: 12px;
+    }
+
+    .toggle-all {
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+
+  // BUYER TABLE
+
+  .panel-heading .data-table.buyer-table {
+
+    width: ~"calc(100% - @{toggle-button-size})";
+
+    tbody {
+      .status.APPROVED {
+        color: @approved-color;
+      }
+      .status.REJECTED {
+        color: @denied-color;
+      }
+      .status.PENDING {
+        color: @pending-color;
+      }
+    }
+
+    td.name {
+      width: 200px;
+    }
+
+    td.email {
+      white-space: nowrap;
+    }
+
+  }
+
+  .toggle {
+    .toggle-btn;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+  }
+
+  // TICKET TABLE
+
+  .ticket-table {
+
+    @table-offset: @toggle-button-size + 60px;
+
+    width: ~"calc(100% - @{table-offset})";
+    border-collapse: collapse;
+    margin: 10px 30px;
+
+    thead {
+      color: #7F9298;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+    tbody tr {
+      border-top: 1px dashed #B2BEC7;
+    }
+    td {
+      padding: 8px 0;
+    }
+
+    .status {
+      &.paid {
+        color: @approved-color;
+      }
+      &.unpaid {
+        color: @pending-color;
+      }
+      &.cancelled {
+        color: @denied-color;
+      }
+    }
+  }
+
+  td.status {
+    text-transform: uppercase;
+    width: 120px;
+  }
+
+}

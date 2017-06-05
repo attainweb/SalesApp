@@ -1,0 +1,9 @@
+<template name="languageSelector">
+  <div class="form-group">
+    <select class={{props.class}} name="language">
+      {{#each language in getLanguages }}
+        <option value={{language.value}} selected={{isSelected language.value}}>{{language.label}}</option>
+      {{/each}}
+    </select>
+  </div>
+</template>

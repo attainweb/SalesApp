@@ -1,0 +1,375 @@
+#!/bin/bash
+
+# Colored statuses for out prints
+DONE="[\033[0;32mDone\033[0m]"
+WAIT="[....]"
+WARN="[\033[1;33mWarn\033[0m]"
+FAIL="[\033[0;31mFail\033[0m]"
+
+
+# set platform variable
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Darwin' ]] ; then
+  platform='darwin'
+fi
+grepCmd='grep'
+echo "platform $platform"
+
+# map commands depending on platform
+if [[ $platform == 'darwin' ]] ; then
+  echo "##### setting grep to ggrep"
+  alias grep='ggrep'
+  grepCmd='ggrep'
+fi
+
+# Split the input parameters
+while [[ $# -gt 0 ]]
+do
+  case $1 in
+    --help)
+    HELP=YES
+    ;;
+    -p|--production)
+    PRODUCTION=YES
+    ;;
+    -t|--test)
+    TEST=YES
+    ;;
+    -c|--config)
+    CONFIG=YES
+    ;;
+    -h|--host)
+    HOST=$2
+    shift
+    ;;
+    -db|--database)
+    DATABASE=$2
+    shift
+    ;;
+    -o|--oplog)
+    OPLOG=$2
+    shift
+    ;;
+    -d|--deploy)
+    DEPLOY=YES
+    ;;
+    -s|--settings)
+    SETTINGS=$2
+    shift
+    ;;
+    -cf|--config-file)
+    CONFIG_FILE=$2
+    ;;
+    *)
+    # catch undefined options
+    ;;
+  esac
+  shift
+done
+
+# Help menu
+if [[ -n $HELP ]] || [[ -n $1 ]] || ([[ -z $CONFIG ]] && [[ -z $DEPLOY ]]); then
+  echo "This program is used to deploy Sales app to either test or production."
+  echo ""
+  echo "Depending on the test/production parameter different secrets file will be chosen."
+  echo "Both the settings file (./config/settings.json) and the secrets file (./config/mode/secret.json) should be given in json format."
+  echo ""
+  echo "Allowed parameters"
+  echo ""
+  echo "  --help             Show this help."
+  echo ""
+  echo "  -p | --production  Set the configuration to production deploy (Can not be combined with -t)."
+  echo ""
+  echo "  -t | --test        Set the configuration to test deploy (Can not be combined with -p)."
+  echo ""
+  echo "  -c | --config      Enable config mode, will create a configuration file."
+  echo ""
+  echo "  -h | --host        The host name to deploy to."
+  echo ""
+  echo "  -db | --database   (optional) The databse connection string to use."
+  echo ""
+  echo "  -o | --oplog       (optional) The oplog connection string to use."
+  echo ""
+  echo "  -s | --settings    The settings file to use (defaults to ./config/settings.json)."
+  echo ""
+  echo "  -d | --deploy      Enable deploy mode, will deploy using the given configuration."
+  echo ""
+  echo "  -cf | --config-file The config file to use, will be overridden if config mode is enabled."
+  echo ""
+  echo "Example usage"
+  echo ""
+  echo "  Deploying a production deployment to <COMPANY_URL> using default settings file."
+  echo "  deploy -c -d -p -h <COMPANY_URL>"
+  echo ""
+  echo "  Deploying a production deployment to <COMPANY_URL> without configuraion."
+  echo "  deploy -d -p -h <COMPANY_URL>"
+  echo ""
+  echo "  Deploying a test deployment to <COMPANY_ENVIRONMENT> using default settings file."
+  echo "  deploy -c -d -t -h <COMPANY_ENVIRONMENT>"
+  echo ""
+  echo "  Create a config file to use for test deployment to <COMPANY_ENVIRONMENT>, but wait with deploying."
+  echo "  deploy -c -t -h <COMPANY_ENVIRONMENT>"
+  echo ""
+  echo "  Deploying a test deployment to <COMPANY_ENVIRONMENT> using /tmp/fileHRYjtk as settings file."
+  echo "  deploy -d -t -cf /tmp/fileHRYjtk"
+  echo ""
+  exit 0
+fi
+
+if [[ -n $CONFIG ]]; then
+  # Entering configuration mode
+  echo "Entering configuration mode."
+  if [[ -z $HOST ]]; then
+    echo -e "$FAIL Host not entered, use -h DOMAIN to enter one (ex: -h <COMPANY_ENVIRONMENT>)"
+    echo "Aborting!"
+    exit 1
+  fi
+  if [[ -n $PRODUCTION ]] && [[ -n $TEST ]]; then
+    echo -e "$FAIL Can't chose production and testing at the same time (-p and -t)"
+    echo "Aborting!"
+    exit 1
+  fi
+  if [[ -z $PRODUCTION ]] && [[ -z $TEST ]]; then
+    echo -e "$FAIL Need to chose either production or testing (-p or -t)"
+    echo "Aborting!"
+    exit 1
+  fi
+  if [[ -n $PRODUCTION ]]; then
+    echo -e "$DONE Production flag detected"
+    SECRETS='./config/production/secret.json'
+  else
+    echo -e "$DONE Test flag detected"
+    SECRETS='./config/test/secret.json'
+  fi
+  if [[ ! -f $SECRETS ]]; then
+    echo -e "$FAIL The secrets file $SECRETS doesn't exists"
+    echo "Aborting!"
+    exit 1
+  fi
+  if [[ -z $SETTINGS ]]; then
+    echo -e "$WARN Settings file not entered, defaults to ./config/settings.json (use -s FILE to enter one)"
+    SETTINGS='./config/settings.json'
+  fi
+  if [[ ! -f $SETTINGS ]]; then
+    echo -e "$FAIL The settings file $SETTINGS doesn't exists"
+    echo "Aborting!"
+    exit 1
+  fi
+
+  ## Merge settings files
+  # Create temp files
+  echo -ne "$WAIT Creating temp files..."
+  TEMP_FILE=`mktemp`
+  TEMP_SECRETS=`mktemp`
+  TEMP_SETTINGS=`mktemp`
+  echo -e "\r$DONE Temp files created     "
+  # Copy settings and secrets to temp files
+  echo -ne "$WAIT Copying settings and secrets..."
+  cp $SETTINGS $TEMP_SETTINGS
+  cp $SECRETS  $TEMP_SECRETS
+  echo -e "\r$DONE Settings and secrets coppied    "
+  # Setting paymentMinimum to 1 when testing
+  if [[ -n $TEST ]]; then
+    echo -ne "$WAIT Setting paymentMinimum to 1 ..."
+    perl -i -pe 's/(\"paymentMinimum\":)\s*[0-9]*/\1 1/s' $TEMP_SETTINGS
+    echo -e "\r$DONE paymentMinimum set to 1 (due to testing)"
+  fi
+  # Setting host URL
+  echo -ne "$WAIT Updating host URL..."
+  perl -i -pe "s/(\"ROOT_URL\":)\s*[^,]*/\1 \"https:\/\/$HOST\"/s" $TEMP_SECRETS
+  echo -e "\r$DONE Host URL set to \"https://$HOST\""
+  # Setting database connection string
+  if [[ -n $DATABASE ]]; then
+    echo -ne "$WAIT Updating database connection string..."
+    ESCAPED_DATABASE=${DATABASE//\@/\\@}
+    ESCAPED_DATABASE=${ESCAPED_DATABASE//\//\\/}
+    perl -i -pe "s/(\"MONGO_URL\":)\s*\"[^\"]*\"/\1 \"$ESCAPED_DATABASE\"/s" $TEMP_SECRETS
+    echo -e "\r$DONE Database connection string set to $DATABASE    "
+  fi
+  # Setting oplog connection string
+  if [[ -n $OPLOG ]]; then
+    echo -ne "$WAIT Updating oplog connection string..."
+    ESCAPED_OPLOG=${OPLOG//\@/\\@}
+    ESCAPED_OPLOG=${ESCAPED_OPLOG//\//\\/}
+    perl -i -pe "s/(\"MONGO_OPLOG_URL\":)\s*\"[^\"]*\"/\1 \"$ESCAPED_OPLOG\"/s" $TEMP_SECRETS
+    echo -e "\r$DONE Oplog connection string set to $OPLOG    "
+  fi
+  # Collaps settings JSON data one level
+  echo -ne "$WAIT Preparing settings and secrets..."
+  perl -i -pe 'BEGIN{undef $/;} s/\s*\{(.*)\}\s*/\1/smg' $TEMP_SETTINGS
+  # Collaps secrets JSON data one level
+  perl -i -pe 'BEGIN{undef $/;} s/\s*\{(.*)\}\s*/\1/smg' $TEMP_SECRETS
+  echo -e "\r$DONE Settings and secrets prepared    "
+  # Insert settings and secrets into a shared JSON file
+  echo -ne "$WAIT Merging settings and secrets..."
+  echo "{" > $TEMP_FILE
+  cat $TEMP_SETTINGS >> $TEMP_FILE
+  echo "  ," >> $TEMP_FILE
+  cat $TEMP_SECRETS >> $TEMP_FILE
+  echo "}" >> $TEMP_FILE
+  echo -e "\r$DONE Settings and secrets merged     "
+  # Clear temp files
+  echo -ne "$WAIT Cleaning..."
+  rm $TEMP_SECRETS
+  rm $TEMP_SETTINGS
+  echo -e "\r$DONE Cleaned up   "
+  # Echo the file name to the terminal
+  echo -e "$DONE The settings are prepared in $TEMP_FILE"
+fi
+
+if [[ -n $DEPLOY ]]; then
+  # Entering deploy mode
+  echo "Entering deploy mode."
+  if [[ -n $PRODUCTION ]] && [[ -n $TEST ]]; then
+    echo -e "$FAIL Can't chose production and testing at the same time (-p and -t)"
+    echo "Aborting!"
+    exit 1
+  fi
+  if [[ -z $PRODUCTION ]] && [[ -z $TEST ]]; then
+    echo -e "$FAIL Need to chose either production or testing (-p or -t)"
+    echo "Aborting!"
+    exit 1
+  fi
+  if [[ -n $PRODUCTION ]]; then
+    echo -e "$DONE Production flag detected"
+    DB_NAME='Production'
+    COLOR="#4f36a6"
+    BUILD_TYPE="Production"
+    EMOJI=":rocket:"
+  else
+    echo -e "$DONE Test flag detected"
+    DB_NAME="Unchanged"
+    COLOR="#36a64f"
+    BUILD_TYPE="Test"
+    EMOJI=":ghost:"
+  fi
+  if [[ -n $HOST ]] && [[ -z $CONFIG ]] && [[ -z $CONFIG_FILE ]]; then
+    # Deploying without configuration
+    echo -e "$WARN Deploying without configuration"
+  else
+    # Deploying with configuration
+    if [[ -z $CONFIG_FILE ]]; then
+      if [[ -n $TEMP_FILE ]]; then
+        echo -e "$DONE Using $TEMP_FILE as deploy configuration"
+        CONFIG_FILE=$TEMP_FILE
+      else
+        echo -e "$FAIL Config file (-cf) is not entered"
+        echo "Aborting!"
+        exit 1
+      fi
+    else
+      if [[ -n $TEMP_FILE ]]; then
+        echo -e "$WARN Using $TEMP_FILE as deploy configuration, instead of $CONFIG_FILE"
+        CONFIG_FILE=$TEMP_FILE
+      else
+        echo -e "$DONE Using $CONFIG_FILE as deploy configuration"
+      fi
+    fi
+    if [[ ! -f $CONFIG_FILE ]]; then
+      echo "$FAIL Config file $CONFIG_FILE doesn't exists"
+      echo "Aborting!"
+      exit 1
+    fi
+    if [[ -n $TEST ]]; then
+      CMD_DB_NAME="$grepCmd -oP '(?<=\"MONGO_URL\": \").*(?=\",)' $CONFIG_FILE | $grepCmd -oP '(?<=[0-9]/).*(?=\?)'"
+      DB_NAME=$(sh -c "$CMD_DB_NAME")
+    fi
+    echo -ne "$WAIT Fetching host from settings file..."
+    CMD_HOST="$grepCmd -oP '(?<=\"ROOT_URL\": \"https:\/\/).*(?=\",)' $CONFIG_FILE"
+    HOST=$(sh -c "$CMD_HOST")
+    if [[ -z $HOST ]]; then
+      echo -e "\r$FAIL Host missing in settings file      "
+      echo "Aborting!"
+      exit 1
+    else
+      echo -e "\r$DONE $HOST fetched from settings file        "
+    fi
+  fi
+
+  ## Deploying configuration
+  echo "Start deploying to $HOST"
+  # Move to meteor folder to deploy
+  cd src
+  # Deploying to galaxy.meteor.com (us-east-1), to deploy to eu-west-1 use eu-west-1.galaxy.meteor.com
+  if [[ -n $HOST ]] && [[ -z $CONFIG ]] && [[ -z $CONFIG_FILE ]]; then
+    DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy $HOST
+  else
+    DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy $HOST --settings $CONFIG_FILE
+  fi
+  # Caching the exit status of the deployment
+  STATUS=$?
+
+  # Send Slack message if successfull
+  if [[ $STATUS -ne 0 ]]; then
+    echo -e "$FAIL Failed to deploy"
+    echo "Aborting!"
+    exit 1
+  else
+    echo -e "$DONE Deployed to $HOST"
+
+    echo -ne "$WAIT Preparing slack message..."
+    # Defining Git and Slack parameters
+    CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+    LATEST_COMMIT=`git log --format="%H" -n 1`
+    GITHUB_REPO="https://github.com/input-output-hk/sales-frontend"
+    COMMIT_URL="$GITHUB_REPO/commit/$LATEST_COMMIT"
+    SLACK_TOKEN="jJj7czblAZk6QDiFZpJpeoAa"
+    SLACK_URL="https://input-output.slack.com/services/hooks/incoming-webhook?token=$SLACK_TOKEN"
+    SLACK_CHANNEL="#deploy"
+    TAG=`git describe --tags HEAD`
+    COMMIT_PART=`expr match "$TAG" '.*-g\(.*\)$'`
+    if [[ -n $COMMIT_PART ]]; then
+      TAG=$COMMIT_PART
+    fi
+
+    # Creating the message part of the Slack message
+    MSG="[
+      {
+        \"fallback\": \"$TAG Deployed to $HOST as a $BUILD_TYPE Build!\",
+          \"color\": \"$COLOR\",
+          \"title\": \"$TAG Deployed to $HOST as a $BUILD_TYPE Build!\",
+          \"text\": \"The branch $CURRENT_BRANCH (<$COMMIT_URL|$TAG>) has been deployed to $HOST.\",
+          \"fields\": [
+            {
+              \"title\": \"Build type\",
+              \"value\": \"$BUILD_TYPE\",
+              \"short\": false
+            },
+            {
+              \"title\": \"Host\",
+              \"value\": \"<https://$HOST|$HOST>\",
+              \"short\": false
+            },
+            {
+              \"title\": \"Commit\",
+              \"value\": \"<$COMMIT_URL|$LATEST_COMMIT>\",
+              \"short\": false
+            },
+            {
+              \"title\": \"Branch\",
+              \"value\": \"$CURRENT_BRANCH\",
+              \"short\": false
+            },
+            {
+              \"title\": \"Database\",
+              \"value\": \"$DB_NAME\",
+              \"short\": false
+            }
+          ]
+        }
+      ]"
+    TO_POST="payload={\"attachments\": $MSG, \"icon_emoji\": \"$EMOJI\", \"channel\":\"$SLACK_CHANNEL\"}"
+    echo -e "\r$DONE Slack message prepared    "
+    echo -ne "$WAIT Sending slack message..."
+    # Send the Slack message via the Slack API
+    STATUS=`curl -s -X POST --data "${TO_POST}" $SLACK_URL`
+    if [[ $STATUS -eq "ok" ]]; then
+      echo -e "\r$DONE Slack message sent      "
+    else
+      echo -e "\r$FAIL Slack message not sent  "
+      exit 1
+    fi
+  fi
+  echo "Remember to remove $CONFIG_FILE if it's a temporary file'"
+fi

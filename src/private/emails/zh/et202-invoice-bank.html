@@ -1,0 +1,58 @@
+{{lastName}} {{firstName}}先生/小姐 您好
+
+
+您的订单已被接纳。
+
+
+请将相当于{{usdRequested}} 的日元、和比特币兑换手续费7.75%的总额汇款给敝司。
+
+※兑换时所花的汇款手续费等，将由客户自行负担。
+
+
+根据特定商业交易法的表示项目
+{{bankTerms}}
+
+
+
+**注意**
+
+汇款时请务必于汇款人名称前加上「汇款ID」。
+
+例) 123456 陈 大文
+
+
+**汇款详情**
+
+〈汇款ID〉{{invoiceNumber}}
+
+〈兑换金额〉{{usdRequested}}
+〈兑换手续费〉{{processingFee}}
+〈汇款金额〉{{total}}
+〈汇款日期〉〈Invoice Date〉{{date}}
+
+汇款户口请选择以下：
+
+〈汇款户口1〉
+
+【银行名称】{{bankAccount1.name}}
+【户口种类】{{bankAccount1.accountType}}
+【分店名称】{{bankAccount1.branchName}}
+【户口号码】{{bankAccount1.accountNumber}}
+【户口名称】{{bankAccount1.transferDestination}}
+
+
+〈汇款户口2〉
+
+【银行名称】{{bankAccount2.name}}
+【户口种类】{{bankAccount2.accountType}}
+【分店名称】{{bankAccount2.branchName}}
+【户口号码】{{bankAccount2.accountNumber}}
+【户口名称】{{bankAccount2.transferDestination}}
+
+
+〈参考〉
+
+汇率计算网站
+http://info.finance.yahoo.co.jp/fx/
+
+{{> footer_LANG_ . }}

@@ -1,0 +1,197 @@
+<template name="reviewUser">
+  {{#with currentUser.currentlyReviewing}}
+  <div id="review-user" class="fullscreen panel panel-default">
+    <div class="panel-body">
+      <div class="col-md-12">
+        <div class="action-buttons">
+          <button class="cancel-user btn btn-default">
+            {{ i18n 'reviewUser.buttonBack' }}
+          </button>
+
+          {{#if showApproveAndReject personalInformation.delegatedToCco }}
+          <button class="approve-user btn btn-primary">
+            {{ i18n 'reviewUser.buttonApprove' }}
+          </button>
+
+          <button class="reject-user btn btn-danger">
+            {{ i18n 'reviewUser.buttonReject' }}
+          </button>
+          {{/if}}
+
+          {{#if isInRole 'compliance' }}
+          <button class="toggle-watch btn btn-info">
+            {{ getWatchButton personalInformation.watchedBy}}
+          </button>
+          {{/if}}
+
+          {{#if showSendToCco personalInformation.delegatedToCco }}
+          <button class="send-to-cco btn btn-warning">
+            {{ i18n 'reviewUser.buttonToCco' }}
+          </button>
+          {{/if}}
+          
+          {{#if showSendToHco personalInformation.delegatedToHco }}
+          <button class="send-to-hco btn btn-success">
+            {{ i18n 'reviewUser.buttonToHco' }}
+          </button>
+          {{/if}}
+
+          {{#if showDoneEditingByHco personalInformation.delegatedToHco }}
+          <button class="done_hco btn btn-warning">
+            {{ i18n 'reviewUser.buttonDoneHco' }}
+          </button>
+          {{/if}}
+          
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div>
+          {{#if showUnderReviewByCco personalInformation.delegatedToCco }}
+          <div class="text-danger">{{ i18n 'reviewUser.inReviewByCco' }}</div>
+          {{/if}}
+          {{#if showUnderReviewByHco personalInformation.delegatedToHco }}
+          <div class="text-danger">{{ i18n 'reviewUser.inReviewByHco' }}</div>
+          {{/if}}
+        </div>
+        {{> user_info}}
+        <div class="user-progress text-center">
+          <h3>{{ i18n 'reviewUser.progress' }}</h3>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" id="setReviewed" {{checkboxDisabled}}>
+                {{ i18n 'reviewUser.reviewed' }}
+            </label>
+          </div>
+        </div>
+        {{ > reviewNotes
+              noteType = 'customerServiceNote'
+              reviewNotes = (getNotesByType 'customerServiceNote')
+        }}
+        {{ > reviewNotes
+              noteType = 'webCheck'
+              reviewNotes = (getNotesByType 'webCheck')
+        }}
+        {{ > reviewNotes
+              noteType = 'call'
+              reviewNotes = (getNotesByType 'call')
+        }}
+        <div>
+          <table class="user-info table table-bordered table-striped table-condensed">
+            <tbody>
+              <th class="text-center">{{i18n 'reviewUser.comment.title'}}</th>
+            </tbody>
+          </table>
+          <textarea class="comment form-control" rows="5" id="comment" maxlength="20000" value="{{comment}}" placeholder="{{i18n 'reviewUser.comment.commentBox'}}"></textarea>
+          <button id="save" class="btn btn-primary">{{ i18n 'reviewUser.comment.addNoteButton' }}</button>
+        </div>
+      </div>
+
+      <div class="col-md-7 no-padding col-document text-center">
+        {{#if selectedDoc}}
+          {{# if  selectedFileCanBeDeleted }}
+            <button type="button" class="delete btn btn-default" disabled="{{state.isDeleting}}">
+              {{ i18n 'approval.buttonDelete' }}
+            </button>
+          {{/if }}
+        <button type="button" class="rotate btn btn-default">
+          {{ i18n 'approval.buttonRotate' }}
+        </button>
+        {{/if}}
+        {{#with selectedDoc}}
+        <div class="doc-image-large">
+          <div class="doc-outer text-center centered">
+            <div class="doc-inner {{rotation}} text-center centered">
+              {{> file docContext}}
+            </div>
+          </div>
+        </div>
+        {{else}}
+        <label class="label label-info">{{ i18n 'reviewUser.noDocSelected' }}</label>
+        {{/with}}
+      </div>
+      <div class="col-md-1 col-document">
+
+        {{> uploader ownerId=this._id}}
+
+        <div class="docs-outer">
+          <div class="docs-inner" style="height:{{docsInnerHeight}}px;">
+            {{#each f in files}}
+            <div class="pull-left doc-image" data-doc-id="{{f._id}}">
+              <div class="image-container {{docFileBorderStyle f.canBeDeleted}}">
+                <div class="doc-img-overlay {{selectedDocClass f._id}}">
+                  <div class="text">
+                    {{#if isSelectedDoc f._id}}
+                    <span class="hover-hidden">
+                      {{{ i18n 'reviewUser.selectedDoc' }}}
+                    </span>
+                    <span class="hover-show">
+                      {{{ i18n 'reviewUser.deSelectDoc' }}}
+                    </span>
+                    {{else}}
+                    {{{ i18n 'reviewUser.selectDoc' }}}
+                    {{/if}}
+                  </div>
+                </div>
+                {{> file smallDocAttrs f}}
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        {{> reviewRecords records=getReviewRecords }}
+      </div>
+    </div>
+    
+  </div>
+  <div class="row review-user-tickets">
+    {{# each invoice in getInvoices }}
+      {{> invoiceTicketsComplianceRows
+          invoice = invoice }}          
+    {{/ each }}
+  </div>
+  {{#if isInRole 'compliance' }}
+  <div class="fullscreen panel panel-default" id="user-comparison">
+    <div class="panel-heading">
+      <h1 class="text-center"> {{i18n 'reviewUser.usersComparison.title'}} </h1>
+    </div>
+    <div class="panel-body">
+      <p class="results-total">{{i18n 'queueDoc.result.totalItems'}}: {{totalSearchResults}}</p>
+      <table class="table">
+          <tr>
+            <th>{{ i18n 'userSummary.progress'}}</th>
+            <th>{{ i18n 'userSummary.surname' }}</th>
+            <th>{{ i18n 'userSummary.name' }}</th>
+            <th>{{ i18n 'userSummary.email' }}</th>
+            <th>{{ i18n 'userSummary.residenceCountry' }}</th>
+            <th>{{ i18n 'userSummary.accountType' }}</th>
+            <th>{{ i18n 'userSummary.levels' }}</th>
+            <th>{{ i18n 'userSummary.indicators' }}</th>
+            <th>{{ i18n 'userSummary.currentReviewer' }}</th>
+          </tr>
+          {{#each user in getUsersWithSameBirthdate}}
+            <tr class="user-comparison-item">
+            {{> userSummaryItem user=user }}
+              <td> <button class="toggle-comparison"
+                type="button"
+                data-toggle="collapse"
+                data-target="#user-{{user._id}}"
+                aria-expanded="false"
+                aria-controls="user-{{user._id}}">
+              </button>              
+              </td>
+            </tr>
+            <tr>
+              <td colspan="100%">
+                {{> usersComparison user=user }}
+              </td>
+            </tr>
+          {{/each}}
+        </table>
+    </div>
+  </div>
+  {{/if}}
+  {{/with}}
+</template>

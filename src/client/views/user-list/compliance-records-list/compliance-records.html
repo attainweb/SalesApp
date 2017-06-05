@@ -1,0 +1,27 @@
+<template name="complianceRecords">
+  <div class="compliance-records panel width-100 panel-default">
+    <div class="panel-heading">
+    <h1 class="text-center">{{ i18n 'complianceRecords.title' }}</h1>
+      <div class="panel-footer">
+        <a href="{{pathFor 'queue'}}">{{ i18n 'complianceRecords.queueLink' }}</a>
+      </div>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <tr>
+          <!--<th>{{ i18n 'complianceRecords.userEmail' }}</th>-->
+          <th>{{ i18n 'complianceRecords.complianceFullName' }}</th>
+          <th>{{ i18n 'complianceRecords.rejectedItem' }}</th>
+          <th>{{ i18n 'complianceRecords.status' }}</th>
+          <th>{{ i18n 'complianceRecords.reason' }}</th>
+        </tr>
+        {{#each complianceRecords}}
+          {{> recordRow}}
+        {{/each}}
+      </table>
+
+      {{> loadingIndicator scrollTargetSelector=state.scrollTarget
+      showIndicator=hasMoreToLoad}}
+    </div>
+  </div>
+</template>

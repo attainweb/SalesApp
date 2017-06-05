@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+echo "Sourcing ./bin/env/testing.sh as environment …"
+source ./bin/env/testing.sh
+source ./bin/env/testing-integration-addons.sh
+cd ./src
+echo "Running all integration tests once …"
+./node_modules/.bin/spacejam test --full-app --driver-package practicalmeteor:mocha-xunit-reporter --no-release-check --port 3200 --settings ../config/testing.json

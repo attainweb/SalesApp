@@ -1,0 +1,41 @@
+
+<template name="mobileNav">
+  <nav class="mobile-nav navbar blue-nav-theme {{navClasses}}">
+
+    <div class="navbar-brand">
+      {{ i18n 'mobileNav.title' }}
+    </div>
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mobile" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <div id="mobile-navbar">
+      <div class="collapse navbar-collapse" id="mobile">
+        <ul class="nav navbar-nav">
+          {{#with currentUser}}
+          {{#if isAdmin}}
+            {{> adminSidebar}}
+          {{/if}}
+          {{#if isDistributor}}
+            {{> distributorSidebar}}
+          {{/if}}
+          {{#if isBuyer}}
+            {{> buyerSidebar}}
+          {{/if}}
+          {{#if isSysop}}
+            {{> sysopSidebar}}
+          {{/if}}
+          <li role="separator" class="divider"></li>
+          <li><a id="logout-button" href="#">{{ i18n 'mobileNav.logout'}}</a></li>
+          {{/with}}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</template>

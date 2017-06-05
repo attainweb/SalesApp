@@ -1,0 +1,46 @@
+Hello {{firstName}} {{lastName}},
+
+Please transfer the JPY amount equivalent of {{usdRequested}} and 7.75% of that amount as Bitcoin transaction fee*.
+
+*You will be responsible for any fees incurred in your {{productName}} Exchange.
+
+Items Disclosed pursuant to the Specified Commercial Transaction Act:
+{{bankTerms}}
+
+
+ATTENTION
+
+Please make sure that you add your Transaction ID when you enter the Sender Name (e.g.123456 Taro {{companyName}}).
+
+Transaction Info
+
+〈Invoice ID〉{{invoiceNumber}}
+
+〈USD Requested〉{{usdRequested}}
+〈Transaction Fee〉{{processingFee}}
+〈Transfer Amount〉{{total}}
+〈Invoice Date〉   {{date}}
+
+Please transfer the amount to one of the following banks:
+
+〈BANK 1〉
+【Bank Name】{{bankAccount1.name}}
+【Account Type】{{bankAccount1.accountType}}
+【Branch Name】{{bankAccount1.branchName}}
+【Account Number】{{bankAccount1.accountNumber}}
+【Transfer Destination】{{bankAccount1.transferDestination}}
+
+
+〈BANK 2〉
+【Bank Name】{{bankAccount2.name}}
+【Account Type】{{bankAccount2.accountType}}
+【Branch Name】{{bankAccount2.branchName}}
+【Account Number】{{bankAccount2.accountNumber}}
+【Transfer Destination】{{bankAccount2.transferDestination}}
+
+
+
+You can check the exchange rate from here:
+http://info.finance.yahoo.co.jp/fx/
+
+{{> footer_LANG_ . }}

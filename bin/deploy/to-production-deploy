@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ -z $1 ]];then
+  echo "Add the config file as parameter (./bin/deploy/to-production-deploy /tmp/fileHRYjtk)"
+  exit 1
+fi
+
+./bin/deploy/deploy -d -p -cf $1

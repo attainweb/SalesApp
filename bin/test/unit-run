@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+echo "Sourcing ./bin/env/testing.sh as environment …"
+source ./bin/env/testing.sh
+source ./bin/env/testing-unit-addons.sh
+cd ./src
+echo "Running all unit tests once …"
+./node_modules/.bin/spacejam test --driver-package practicalmeteor:mocha --no-release-check --port 3300 --settings ../config/testing.json

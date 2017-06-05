@@ -1,0 +1,78 @@
+@toggle-button-size: 40px;
+
+.data-panel {
+
+  border: none;
+  border-radius: 0;
+  background: none;
+
+  > .panel-heading {
+    background-color: white;
+    border-radius: 0;
+    position: relative;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .data-table {
+
+      width: 100%;
+
+      thead {
+        color: #9BA7AB;
+        text-transform: uppercase;
+        font-size: 13px;
+
+        td {
+          padding-bottom: 0.5em;
+        }
+      }
+
+      tbody {
+        color: @text-color;
+        font-weight: 500;
+      }
+    }
+  }
+
+  > .panel-collapse {
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    overflow: hidden;
+    transition: height 200ms;
+    &.in {
+      height: auto;
+    }
+  }
+}
+
+.toggle-btn {
+  text-indent: -9999px;
+  overflow: hidden;
+  width: @toggle-button-size;
+  height: @toggle-button-size;
+  border: none;
+  background: url("/images/open-panel-button.svg") no-repeat;
+  background-size: 100%;
+  padding: 0;
+  &[aria-expanded="true"] {
+    background-image: url("/images/collapse-panel-button.svg");
+  }
+  &:active, &:focus {
+    outline: none;
+  }
+}
+
+.table-base {
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  th, td {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    vertical-align: middle;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}

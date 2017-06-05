@@ -1,0 +1,264 @@
+<template name="user_info">
+    <table class="user-info table table-bordered table-striped table-condensed">
+        <tbody>
+            <tr>
+                <td class="id-lbl">ID</td>
+                <td>{{_id}}</td>
+            </tr>
+            <tr>
+                <td class="accountType-lbl">{{ i18n 'userInfo.accountType' }}</td>
+                <td>{{accountTypeText}}, {{role}}</td>
+            </tr>
+            {{#if isCompany }}
+            <tr>
+                <td class="companyName-lbl">{{ i18n 'userInfo.companyName' }}</td>
+                <td>{{personalInformation.companyName}}</td>
+            </tr>
+            <tr>
+                <td class="registrationDate-lbl">{{ i18n 'userInfo.registrationDate' }}</td>
+                <td>{{registrationDateText}}</td>
+            </tr>
+            {{/if}}
+            <tr>
+                <td class="name-lbl">{{ i18n 'userInfo.name' }}</td>
+                <td>
+                    <span class="surname">{{surname}}</span> <span class="name">{{firstName}}</span>
+                    {{#if allowEdit}}
+                    <button class="edit-surname pull-right btn btn-default btn-xs">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+
+                    <button class="edit-name pull-right btn btn-default btn-xs">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                    {{/if}}
+                </td>
+
+            </tr>
+            {{#if showEditField 'personalInformation.name'}}
+            <tr>
+                <td></td>
+                <td>
+                    {{> editField field='personalInformation.name' schema=getPersonalInformationNameSchema doc=this successHandler=hideEditField }}
+                </td>
+            </tr>
+            {{/if}}
+            {{#if showEditField 'personalInformation.surname'}}
+            <tr>
+                <td></td>
+                <td>
+                    {{> editField field='personalInformation.surname' schema=getPersonalInformationSurnameSchema doc=this successHandler=hideEditField }}
+                </td>
+            </tr>
+            {{/if}}
+
+            <tr>
+                <td class="email-lbl">{{ i18n 'userInfo.email' }}</td>
+                <td>
+                    <span class="email">{{primaryEmail}}</span>
+                </td>
+            </tr>
+
+            {{#if state.showEditEmail}}
+            <tr>
+                <td></td>
+                <td>
+                    {{> editEmail doc=this successHandler=hideShowEditEmail }}
+                </td>
+            </tr>
+            {{/if}}
+            <tr>
+                <td class="status-lbl">{{ i18n 'userInfo.status' }}</td>
+                <td>
+                    <span class="status">{{personalInformationStatus}}</span>
+                    {{#if allowEdit}}
+                    <button class="edit-status pull-right btn btn-default btn-xs">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                    {{/if}}
+                </td>
+            </tr>
+            {{#if showEditField 'personalInformation.status'}}
+            <tr>
+                <td></td>
+                <td>
+                    {{> editField field='personalInformation.status' schema=getPersonalInformationStatusSchema doc=this successHandler=hideEditField }}
+                </td>
+            </tr>
+            {{/if}}
+            {{#if isDistributor}}
+                <tr>
+                    <td class="isUnderInvestigation-lbl">{{ i18n 'userInfo.isUnderInvestigation' }}</td>
+                    <td>
+                        <span class="isUnderInvestigation">{{isUnderInvestigation}}</span>
+                        {{#if allowEdit}}
+                        <button class="edit-under-investigation pull-right btn btn-default btn-xs">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                        {{/if}}
+                    </td>
+                </tr>
+                {{#if showEditField 'personalInformation.isUnderInvestigation'}}
+                <tr>
+                    <td></td>
+                    <td>
+                        {{> editField field='personalInformation.isUnderInvestigation' schema=getPersonalInformationUnderInvestigationSchema doc=this successHandler=hideEditField }}
+                    </td>
+                </tr>
+                {{/if}}
+            {{/if}}
+            <tr>
+                <td class="birthdate-lbl">{{ i18n 'userInfo.birthdate' }}</td>
+                <td>
+                    <span class="birthdate">{{birthdateText}}</span>
+                    {{#if allowEdit}}
+                    <button class="edit-birthdate pull-right btn btn-default btn-xs">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                    {{/if}}
+                </td>
+            </tr>
+            {{#if showEditField 'personalInformation.birthdate'}}
+            <tr>
+                <td></td>
+                <td>
+                    {{> editField field='personalInformation.birthdate' schema=getPersonalInformationBirthdateSchema doc=this successHandler=hideEditField }}
+                </td>
+            </tr>
+            {{/if}}
+
+            {{#if isDistributor}}
+            <tr>
+                <td class="distlevel-lbl">{{ i18n 'userInfo.distlevel' }}</td>
+                <td>{{distlevel}}</td>
+            </tr>
+            {{/if}}
+            {{#if isBuyer}}
+            <tr>
+                <td class="complianceLevels-lbl">{{ i18n 'userInfo.complianceLevels' }}</td>
+                <td>{{complianceLevel}} / {{applyingForComplianceLevel}}</td>
+            </tr>
+            <tr>
+                <td class="usdRequested-lbl">{{ i18n 'userInfo.usdRequested' }}</td>
+                <td>{{formatCurrency 'USD' latestUsdRequested}}</td>
+            </tr>
+            {{/if}}
+            {{#if notPartner}}
+            <tr>
+                <td class="branchPartner-lbl">{{ i18n 'userInfo.branchPartner' }}</td>
+                <td>{{branchPartner}}</td>
+            </tr>
+            <tr>
+                <td class="referredBy-lbl">{{ i18n 'userInfo.referredBy' }}</td>
+                <td>{{originator}}</td>
+            </tr>
+            {{/if}}
+            <tr>
+                <td class="createdAt-lbl">{{ i18n 'userInfo.createdAt' }}</td>
+                <td>{{formatDate createdAt}}</td>
+            </tr>
+            <tr>
+                <td class="enrollmentClientIP-lbl">{{ i18n 'userInfo.enrollmentClientIP' }}</td>
+                <td>{{state.enrollmentClientIP}}{{state.ipRegionInfo}}</td>
+            </tr>
+            <tr>
+                <td class="phone-lbl">{{ i18n 'userInfo.phone' }}</td>
+                <td>
+                    <span class="phone">{{personalInformation.phone}}</span>
+                    {{#if allowEdit}}
+                    <button class="edit-phone pull-right btn btn-default btn-xs">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                    {{/if}}
+                </td>
+            </tr>
+            {{#if showEditField 'personalInformation.phone'}}
+            <tr>
+                <td></td>
+                <td>
+                    {{> editField field='personalInformation.phone' schema=getPersonalInformationPhoneSchema doc=this successHandler=hideEditField }}
+                </td>
+            </tr>
+            {{/if}}
+            <tr>
+                <td class="language-lbl">{{ i18n 'userInfo.language' }}</td>
+                <td>
+                    <span class="language">{{personalInformation.language}}</span>
+                    {{#if allowEdit}}
+                    <button class="edit-language pull-right btn btn-default btn-xs">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                    {{/if}}
+                </td>
+            </tr>
+            {{#if showEditField 'personalInformation.language'}}
+            <tr>
+                <td></td>
+                <td>
+                    {{> editField field='personalInformation.language' schema=getPersonalInformationLanguageSchema doc=this successHandler=hideEditField }}
+                </td>
+            </tr>
+            {{/if}}
+            <tr>
+                <td class="residenceCountry-lbl">{{ i18n 'userInfo.residenceCountry' }}</td>
+                <td>
+                    <span class="residence-country">{{getTranslatedResidenceCountry}}</span>
+                    {{#if allowEdit}}
+                    <button class="edit-residence-country pull-right btn btn-default btn-xs">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                    {{/if}}
+                </td>
+            </tr>
+            {{#if showEditField 'personalInformation.residenceCountry'}}
+            <tr>
+                <td></td>
+                <td>
+                    {{> editField field='personalInformation.residenceCountry' schema=getPersonalInformationResidenceCountrySchema doc=this successHandler=hideEditField }}
+                </td>
+            </tr>
+            {{/if}}
+            <tr>
+                <td class="address-lbl">{{ i18n 'userInfo.address' }}</td>
+                <td>
+                    {{> queueAddress personalInformation.postaddress}}
+                    {{#if allowEdit}}
+                    <button class="edit-address pull-right btn btn-default btn-xs">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                    {{/if}}
+                </td>
+            </tr>
+            <tr>
+                <td class="apiInvalidZip-lbl">{{ i18n 'userInfo.apiInvalidZip.label' }}</td>
+                <td>{{apiInvalidZip personalInformation.postaddress.apiInvalidZip}}</td>
+            </tr>
+            {{#if state.showEditAddress }}
+            <tr>
+                <td></td>
+                <td>
+                    {{> editField field='personalInformation.postaddress.address' schema=getPersonalInformationPostaddressAddressSchema doc=this successHandler=hideShowEditAddress }}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    {{> editField field='personalInformation.postaddress.zip' schema=getPersonalInformationPostaddressZipSchema doc=this successHandler=hideShowEditAddress }}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    {{> editField field='personalInformation.postaddress.city' schema=getPersonalInformationPostaddressCitySchema doc=this successHandler=hideShowEditAddress }}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    {{> editField field='personalInformation.postaddress.state' schema=getPersonalInformationPostaddressStateSchema doc=this successHandler=hideShowEditAddress }}
+                </td>
+            </tr>
+            {{/if}}
+        </tbody>
+    </table>
+</template>

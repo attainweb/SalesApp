@@ -1,0 +1,41 @@
+
+.review-user-doc {
+  margin-right: 10px;
+  margin-bottom: 10px;
+
+  .image-container {
+    position: relative;
+
+    .doc-img-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: rgba(0,0,0,.5);
+
+      .text {
+        margin-top: 26px;
+        color: white;
+        text-align: center;
+        font-size: 10px;
+      }
+
+      &.active {
+        .text { display: none; }
+        &:hover .text { display: block; }
+      }
+    }
+  }
+
+  &:hover .doc-img-overlay,
+  .doc-img-overlay.active {
+    z-index: 1;
+
+    &:not(.disabled) { cursor: pointer; }
+  }
+
+  .doc-img-overlay, .doc-img, .small-doc {
+    height: 80px;
+    width: 80px;
+  }
+}

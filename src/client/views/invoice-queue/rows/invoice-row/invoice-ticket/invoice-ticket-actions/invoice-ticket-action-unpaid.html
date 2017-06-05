@@ -1,0 +1,22 @@
+<template name="invoice_ticket_action_unpaid">
+  <div class="invoice_ticket_action_unpaid">
+    <div class="funds-received form">
+      <div class="row">
+        <div class="col-xs-4">
+        {{> currency_amount_input 
+            currencyIcon='fa-jpy' 
+            onValidData=onValidAmount 
+            onInvalidData=onInvalidAmount }}
+        </div>
+        <div class= "col-xs-4">
+          {{ > bankSelector class="form-control" residenceCountry="JP" returnSelectedBank=getSelectedBank}}
+        </div>
+        <div class="col-xs-1">
+          <button class="btn btn-primary funds-received" disabled={{isEnabled}}>
+            {{ i18n 'invoiceCard.buttons.fundsReceived' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
